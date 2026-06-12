@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grimorio Dinámico - BotC</title>
+    <link rel="stylesheet" href="Juego.css">
+</head>
+<body class="inicio">
+
+    <div id="edition-selector" class="setup-panel">
+        <h1 class="titulo-gotico">Blood on the ClockTower</h1>
+        <h2 class="subtitulo-gotico">Selecciona una Edición</h2>
+        <div class="grid-ediciones">
+            <button class="btn-principal btn-edicion" onclick="iniciarEdicion('TB')">Trouble Brewing</button>
+            <button class="btn-principal btn-edicion" onclick="iniciarEdicion('BMR')">Bad Moon Rising</button>
+            <button class="btn-principal btn-edicion" onclick="iniciarEdicion('SV')">Sects & Violets</button>
+            <button class="btn-principal btn-edicion" onclick="iniciarEdicion('CUSTOM')">Edición Personalizada</button>
+        </div>
+    </div>
+
+    <div id="custom-filter-panel" class="setup-panel" style="display: none;">
+        <button onclick="window.location.reload()" class="btn-secundario" style="margin-bottom: 20px;">← Volver</button>
+        <h1 class="titulo-gotico">Filtro Personalizado</h1>
+        <p style="color: #ffd700; margin-bottom: 10px;">Selecciona los roles que existirán en esta partida:</p>
+        <div class="controles-setup">
+            <div id="contador-filtro-custom" class="contador-roles">Seleccionados: 0</div>
+            <div id="lista-filtro-custom" class="selector-roles-grid"></div>
+            <button class="btn-principal" onclick="confirmarFiltroCustom()">Confirmar Selección</button>
+        </div>
+    </div>
+
+    <div id="setup-panel" class="setup-panel" style="display: none;">
+        <button onclick="volverAlMenu()" class="btn-secundario" style="margin-bottom: 20px;">← Volver</button>
+        <h1 id="titulo-edicion" class="titulo-gotico">Configuración</h1>
+        <div class="controles-setup">
+            <div class="grupo-control">
+                <label for="numJugadores">¿Cuántos Jugadores?</label>
+                <div class="custom-number-input">
+                    <button type="button" class="btn-step" onclick="cambiarJugadores(-1)">-</button>
+                    <input type="number" id="numJugadores" min="5" max="20" value="12" readonly onchange="actualizarSugerencia()">
+                    <button type="button" class="btn-step" onclick="cambiarJugadores(1)">+</button>
+                </div>
+                <div id="sugerencia-composicion" class="sugerencia-texto"></div>
+            </div>
+            
+            <div class="grupo-control">
+                <label>Selecciona los Roles en Juego:</label>
+                <div id="contador-roles-seleccion" class="contador-roles">Seleccionados: 0</div>
+                <div id="lista-roles-seleccion" class="selector-roles-grid"></div>
+            </div>
+
+            <div id="config-borracho" style="display: none;" class="grupo-control">
+                <label>Rol que cree ser el Borracho:</label>
+                <select id="rol-falso-borracho"></select>
+            </div>
+
+            <button class="btn-principal" onclick="generarGrimorio()">Generar Grimorio</button>
+        </div>
+    </div>
+
+    <div id="game-controls" class="game-controls" style="display: none;">
+        <button onclick="volverAlMenu()" class="btn-secundario">← Menú</button>
+        <button id="btn-asignar" onclick="asignarRolesAleatorios()" class="btn-accion">Asignar Roles</button>
+        <button onclick="mostrarRolesFuera()" class="btn-accion">Roles Fuera</button>
+        <button class="btn-accion" onclick="mostrarMaldad()">Mostrar Maldad</button>
+        <button id="btn-voto-inicio" onclick="empezarVotacion()" class="btn-accion" style="background: linear-gradient(180deg, #006400 0%, #004d00 100%); border-color: #00ff00;">Empezar Votación</button>
+        <button id="btn-voto-fin" onclick="acabarVotacion()" class="btn-accion" style="display: none; background: linear-gradient(180deg, #8b0000 0%, #4a0404 100%); border-color: #ff0000;">Acabar Votación</button>
+        <button class="btn-accion" onclick="toggleMenuChats()">CHATS</button>
+        <button class="btn-accion" onclick="toggleMenuLlamadas()">Llamar</button>
+        <button id="btn-colgar-gm" class="btn-accion" 
+    style="display:none; position:fixed; top:20px; right:20px; z-index:2000; background: #8b0000; border: 2px solid #ff0000; width: auto; padding: 10px 20px;" 
+    onclick="finalizarLlamada()">
+    🛑 FINALIZAR LLAMADA
+</button>
+    </div>
+
+    <select id="selector-chat-gm" onchange="abrirChatConJugador(this.value)">
+        <option value="">-- Selecciona Jugador --</option>
+    </select>
+
+    <div id="chat-gm" class="chat-ventana">
+        <div class="chat-header">
+            <span id="chat-con-titulo">Chat</span>
+            <span style="cursor:pointer" onclick="cerrarChatGM()">X</span>
+        </div>
+        <div id="mensajes-gm" class="chat-mensajes"></div>
+        <div class="chat-input-area">
+            <input type="text" id="input-msg-gm" class="chat-input" placeholder="Escribe..." onkeypress="if(event.key==='Enter') enviarMensajeGM()">
+            <button onclick="enviarMensajeGM()" style="background:none; border:none; color:#ffd700; cursor:pointer; margin-left:5px;">➤</button>
+        </div>
+    </div>
+
+<select id="selector-llamada-gm" class="input-decorado" style="display:none; position:fixed; top:70px; right:20px; z-index:2000;" onchange="iniciarLlamada(this.value)">
+</select>
+<button id="btn-colgar-gm" class="btn-accion" style="display:none; position:fixed; top:120px; right:20px; z-index:2000; background: #620b0b;" onclick="finalizarLlamada()">Colgar Llamada</button>
+
+<audio id="audio-remoto" autoplay></audio>
+
+    <div id="main-container" class="main-container" style="display: none;">
+        <div id="grimorio" class="grimorio"></div>
+    </div>
+
+    <div id="modal-roles" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2 class="titulo-modal">Roles fuera de juego</h2>
+            <hr class="separador-dorado">
+            <div id="contenido-modal" class="roles-fuera-grid"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="Juego.js"></script>
+</body>
+</html>

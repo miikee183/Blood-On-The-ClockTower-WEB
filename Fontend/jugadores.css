@@ -1,0 +1,313 @@
+/* Soporte para la escala pequeña en resoluciones bajas o muchos jugadores */
+.jugador-container.escala-pequena {
+    transform: translate(-50%, -50%) scale(0.85);
+}
+
+.jugador-container.escala-minima {
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+.seccion-rol-titulo {
+    grid-column: 1 / -1;
+    font-family: 'Cinzel', serif;
+    color: #ffd700;
+    font-size: 1.1em;
+    border-bottom: 1px solid #444;
+    padding: 10px 0;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+ /* Contenedor para agrupar controles de voz */
+        .controles-voz-jugador {
+            position: fixed; top: 20px; left: 85px;
+            z-index: 1600; display: flex; align-items: center; gap: 10px;
+            background: rgba(0, 0, 0, 0.6); padding: 5px 15px; border-radius: 30px;
+            border: 1px solid #333;
+        }
+
+        #btn-llamada-jugador {
+            background: #1a1a1a; border: 1px solid #333;
+            border-radius: 50%; width: 45px; height: 45px;
+            font-size: 18px; cursor: default; color: #444;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; opacity: 0.5;
+        }
+
+        #btn-llamada-jugador.recibiendo-llamada {
+            background: #000; border: 2px solid #ff0000;
+            color: #ff4444; cursor: pointer; opacity: 1;
+            box-shadow: 0 0 15px #ff0000;
+            animation: pulse-red 1.5s infinite;
+        }
+
+        #btn-llamada-jugador.en-llamada {
+            background: #062006; border: 2px solid #4ee44e;
+            color: #4ee44e; cursor: default; opacity: 1;
+            box-shadow: 0 0 10px #4ee44e;
+            animation: none;
+        }
+
+        #selector-microfono {
+            background: #000; color: #ffd700; border: 1px solid #ffd700;
+            border-radius: 5px; padding: 5px; font-family: 'Cinzel', serif;
+            font-size: 10px; max-width: 100px; outline: none;
+        }
+
+        .control-volumen {
+            display: flex; align-items: center; gap: 5px; color: #ffd700; font-size: 14px;
+        }
+
+        input[type=range] {
+            width: 80px; cursor: pointer; accent-color: #ffd700;
+        }
+
+        #btn-mute-jugador {
+            background: #620b0b; color: #fff;
+            border: 1px solid #ffd700; border-radius: 5px;
+            padding: 5px 10px; cursor: pointer; font-family: 'Cinzel', serif;
+            font-size: 0.7em;
+        }
+
+        @keyframes pulse-red {
+            0% { transform: scale(1); box-shadow: 0 0 0px #ff0000; }
+            50% { transform: scale(1.1); box-shadow: 0 0 20px #ff0000; }
+            100% { transform: scale(1); box-shadow: 0 0 0px #ff0000; }
+        }
+
+        .chat-ventana-jugador {
+            position: fixed; top: 80px; left: 20px;
+            width: 280px; height: 350px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #ff0000;
+            border-radius: 10px;
+            display: none; flex-direction: column;
+            z-index: 1600; overflow: hidden;
+            font-family: 'Cinzel', serif;
+        }
+
+        .chat-header {
+            padding: 8px; background: #200; color: #ffd700;
+            border-bottom: 1px solid #ff0000; text-align: center; font-size: 0.9em;
+        }
+
+        .chat-mensajes {
+            flex: 1; padding: 10px; overflow-y: auto; color: #ffd700;
+        }
+
+        .msg-nombre { text-decoration: underline; font-weight: bold; display: block; margin-top: 5px; color: #ffd700; }
+        .msg-texto { display: block; margin-bottom: 10px; color: #ffd700; }
+        .chat-input-area { padding: 10px; border-top: 1px solid #ff0000; display: flex; }
+        .chat-input { flex: 1; background: #111; border: 1px solid #ff0000; color: #ffd700; padding: 5px; outline: none; }
+
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #1a0a0a 0%, #000 100%);
+            z-index: 2000; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+        }
+        
+        .voto-btn-container {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1500; display: none;
+        }
+        
+        /* ESTADO VIVO: Brillo verde */
+        .jugador-publico.ha-votado {
+            border: 3px solid #4ee44e !important;
+            box-shadow: 0 0 20px #4ee44e !important;
+        }
+
+        /* ESTADO MUERTO O EJECUTADO: Apariencia apagada */
+        .jugador-publico.muerto, .jugador-publico.ejecutado {
+            filter: grayscale(0.8) opacity(0.6);
+            border-color: #444 !important;
+        }
+
+        .jugador-publico.muerto .estado-etiqueta, .jugador-publico.ejecutado .estado-etiqueta {
+            color: #888;
+            border-color: #555;
+        }
+
+        /* VOTO FANTASMAL: Brillo blanco apagado */
+        .jugador-publico.muerto.ha-votado, .jugador-publico.ejecutado.ha-votado {
+            border: 3px solid #ffffff !important;
+            box-shadow: 0 0 20px #ffffff !important;
+            filter: grayscale(0.2) opacity(0.9); /* Se ilumina un poco al votar */
+        }
+
+        #modal-rol-privado, #modal-info-maldad {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 3000; display: none; animation: fadeIn 0.4s ease;
+        }
+
+        .card-rol-asignado {
+            background: #0d0d0d; border: 3px solid #ffd700;
+            padding: 20px; border-radius: 15px; width: 260px;
+            box-shadow: 0 0 30px rgba(0,0,0,1), 0 0 15px #ffd700;
+            text-align: center; color: white;
+        }
+
+        .card-rol-asignado.demonio { border-color: #620b0b; box-shadow: 0 0 20px #4f0707; }
+        .card-rol-asignado.esbirro { border-color: #c01717; box-shadow: 0 0 20px #b01a1a; }
+        .card-rol-asignado.pueblerino { border-color: #2d5ee4; box-shadow: 0 0 20px #2d5ad5; }
+        .card-rol-asignado.forastero { border-color: #0a2b5b; box-shadow: 0 0 20px #043882; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        body.setup-panel {
+            background: radial-gradient(circle, #1a0a0a 0%, #000 100%);
+            color: #e0e0e0; min-height: 100vh; margin: 0;
+            overflow-x: hidden; display: flex; flex-direction: column;
+        }
+
+        .layout-principal {
+            display: flex; width: 100%; flex: 1; gap: 20px;
+            padding: 0 20px 20px 20px; box-sizing: border-box;
+        }
+
+        #panel-instrucciones {
+            display: none; flex: 0 0 350px; background: rgba(10, 0, 0, 0.95);
+            padding: 25px; border: 2px solid #ffd700; border-radius: 10px;
+            overflow-y: auto; max-height: 85vh; margin-top: 10px;
+        }
+
+        .contenido-juego { flex: 1; display: flex; flex-direction: column; }
+
+        .lista-referencia {
+            display: flex !important; flex-direction: column !important;
+            width: 80%; height: 50vh; background: rgba(0, 0, 0, 0.8) !important;
+            border: 2px solid #8b0000 !important; margin: 10px auto;
+            overflow-y: auto; border-radius: 10px; padding: 20px;
+        }
+
+        .rol-info-card {
+            margin-bottom: 10px; padding: 12px; border-left: 5px solid #444;
+            background: rgba(30, 30, 30, 0.7); border-radius: 0 8px 8px 0;
+        }
+
+        .rol-info-card.demonio {
+            border-left-color: #620b0b !important;
+        }
+
+        .rol-info-card.esbirro {
+            border-left-color: #c01717 !important;
+        }
+
+        .rol-info-card.forastero {
+            border-left-color: #0a2b5b !important;
+        }   
+
+        .rol-info-card.pueblerino {
+            border-left-color: #2d5ee4 !important;
+        }
+
+        .contenedor-grimorio-jugadores {
+            width: 100%; flex: 1; min-height: 400px;
+            border: 3px solid #ffd700;
+            border-radius: 15px; position: relative; overflow: hidden;
+            background: url("imagenes/fondo.png");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .jugador-publico {
+            position: absolute; display: flex; flex-direction: column;
+            align-items: center; transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            padding: 12px; border-radius: 10px; border: 2px solid #8b4513;
+            width: 140px; box-shadow: 0 8px 16px rgba(0,0,0,0.9);
+            z-index: 2; transition: all 0.4s ease;
+        }
+
+        .nombre-publico {
+            background: #000; border: 1px solid #ffd700;
+            color: #fff; text-align: center;
+            width: 90%; font-size: 12px; border-radius: 20px;
+            padding: 5px; margin-bottom: 5px;
+        }
+
+        .nombre-propio {
+            border-color: #ffd700 !important;
+            box-shadow: 0 0 10px #ffd700;
+            color: #ffffff !important;
+            font-weight: bold;
+        }
+
+        .estado-etiqueta {
+            background: #111; color: #4ee44e; border: 1px solid #333; 
+            border-radius: 4px; font-size: 10px; width: 100%;
+            padding: 3px; text-align: center;
+        }
+
+        .input-decorado {
+            background: #000 !important;
+            border: 1px solid #ffd700 !important;
+            color: #ffd700 !important;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2em !important;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            outline: none;
+            box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        #sticky-rol-info {
+            position: fixed; left: 20px; bottom: 20px;
+            background: rgba(0,0,0,0.85); border: 2px solid #ffd700;
+            padding: 10px 15px; border-radius: 15px; z-index: 1000;
+            display: none; font-family: 'Cinzel', serif; color: #ffd700;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        #btn-abrir-chat {
+            position: fixed; top: 20px; left: 20px;
+            z-index: 1600; background: #000; border: 1px solid #ff0000;
+            border-radius: 50%; width: 50px; height: 50px;
+            font-size: 24px; cursor: pointer; color: #ffd700;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 10px rgba(255,0,0,0.5);
+        }
+
+        .contenedor-roles-fuera {
+            display: none; margin: 10px auto; width: 95%; max-width: 1200px;
+            border: 2px solid #620b0b; padding: 20px; border-radius: 12px;
+            background: rgba(15, 0, 0, 0.98); position: relative; z-index: 100;
+        }
+
+        .lista-roles-grid { 
+            display: flex; flex-wrap: wrap; justify-content: center; 
+            gap: 12px; margin-top: 20px; max-height: 300px; overflow-y: auto;
+        }
+
+        .mini-card-rol { 
+            background: #1a1a1a; border: 1px solid #333; padding: 10px 15px; 
+            border-radius: 6px; color: #fff; display: flex; align-items: center; gap: 8px;
+        }
+
+        .barra-tiempo-contenedor { position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: #200; }
+        .barra-progreso { height: 100%; width: 100%; background: #ff0000; }
+
+        .maldad-seccion {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.maldad-titulo {
+    color: #ff4444; /* Rojo malvado */
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.maldad-lista {
+    color: #eee;
+    font-size: 1.2em;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+}

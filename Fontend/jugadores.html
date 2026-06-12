@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Roles - Blood on the Clocktower</title>
+    <link rel="stylesheet" href="Juego.css">
+    <link rel="stylesheet" href="jugadores.css">
+</head>
+<body class="setup-panel">
+
+    <div id="login-overlay">
+        <h1 class="titulo-gotico">Ingresa tu Nombre</h1>
+        <input type="text" id="input-usuario" class="input-decorado" style="width: 250px; margin-bottom: 20px;" placeholder="Tu nombre...">
+        <button class="btn-principal" style="width: 200px;" onclick="registrarUsuario()">Entrar</button>
+    </div>
+
+    <button id="btn-abrir-chat" onclick="toggleChatJugador()">💬</button>
+    <div id="chat-privado" class="chat-ventana-jugador">
+        <div class="chat-header">MENSAJES CON EL NARRADOR</div>
+        <div id="mensajes-privados" class="chat-mensajes"></div>
+        <div class="chat-input-area">
+            <input type="text" id="input-msg-privado" class="chat-input" placeholder="Escribe al GM..." onkeypress="if(event.key==='Enter') enviarMensajeAlGM()">
+        </div>
+    </div>
+
+    <div class="controles-voz-jugador">
+        <button id="btn-llamada-jugador" onclick="aceptarLlamada()">📞</button>
+        <select id="selector-microfono"></select>
+        <div class="control-volumen">
+            <span>🔈</span>
+            <input type="range" id="volumen-gm" min="0" max="1" step="0.1" value="1" oninput="ajustarVolumen(this.value)">
+            <span>🔊</span>
+        </div>
+        <button id="btn-mute-jugador" onclick="toggleMute()">🎙️</button>
+    </div>
+
+    <audio id="audio-gm" autoplay></audio>
+
+    <div id="modal-rol-privado">
+        <div id="card-inner" class="card-rol-asignado">
+            <div id="privado-categoria" style="font-weight: bold; color: #ffd700; text-transform: uppercase; margin-bottom: 5px; font-size: 0.9em; letter-spacing: 1px;"></div>
+            <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase;">Tu Rol Secreto:</div>
+            <div id="privado-emoji" style="font-size: 2.5em; margin: 10px 0;"></div>
+            <div id="privado-nombre" style="font-size: 1.6em; color: #ffd700;"></div>
+            <div id="privado-info" style="margin-top: 10px; font-size: 0.9em;"></div>
+            <button class="btn-principal" style="margin-top: 20px; width: 100%;" onclick="document.getElementById('modal-rol-privado').style.display='none'">He leído mi rol</button>
+        </div>
+    </div>
+
+    <div id="modal-info-maldad">
+        <div class="card-rol-asignado esbirro" style="width: 300px;">
+            <h3 style="color: #ffd700; font-family: 'Cinzel';">Información de Equipo</h3>
+            <div id="cuerpo-maldad" style="font-size: 0.9em; margin: 15px 0;"></div>
+            <button class="btn-principal" onclick="document.getElementById('modal-info-maldad').style.display='none'">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="sticky-rol-info"></div>
+
+    <div id="voto-btn-container" class="voto-btn-container">
+        <button id="btn-votar" class="btn-principal" onclick="ejecutarVoto()">VOTAR</button>
+    </div>
+
+    <h1 class="titulo-gotico" style="font-size: 2.2em; margin: 10px 0;">Blood on the ClockTower</h1>
+    <div style="margin-bottom: 10px; display: flex; justify-content: center;">
+        <button class="btn-principal" style="width: auto; padding: 10px 30px;" onclick="toggleInstrucciones()">¿Cómo jugar?</button>
+    </div>
+
+    <div id="contenedor-roles-fuera" class="contenedor-roles-fuera">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <h3 style="color: #ffd700; font-family: 'Cinzel'; margin: 0; font-size: 1.2em;">Memoriza tus posibles Faroles:</h3>
+            <span id="txt-cuenta-atras" style="color: #ff0000; font-weight: bold; font-family: monospace; font-size: 1.3em;">10s</span>
+        </div>
+        <div id="lista-roles-fuera" class="lista-roles-grid"></div>
+        <div class="barra-tiempo-contenedor">
+            <div id="barra-progreso" class="barra-progreso"></div>
+        </div>
+    </div>
+
+    <div class="layout-principal">
+        <div id="panel-instrucciones">
+            <h2 class="subtitulo-gotico">Instrucciones</h2>
+            <p>Habrá un narrador que se encargará de que todo salga bien y que le dé juego a la partida, cada jugador tendrá un rol que se divide en 2 bandos los buenos (Pueblo y Forasteros) y los malos (Esbirros y Demonios) para que los buenos ganen: tienen que eliminar a los demonios y para que los malos ganen: tiene que haber solo un jugador bueno vivo.</p>
+            <p>Se basa en un número de días que tendrán un día y una noche, por el día todos los jugadores podréis hablar todos juntos o podréis separaros para hablar en privado y se puede unir cualquier persona a la conversación si esa persona quiere.
+Una vez que ya habéis hablado lo suficiente se iniciará una reunión donde podréis hablar todos juntos y podréis nominar a un jugador para ejecutarlo, tendréis que dar un argumento de porque lo nomináis, y el jugador nominado tendrá que defenderse no podréis interrumpir a ni uno de los 2 jugadores, una vez que ya hayan hablado se iniciara una votación para ejecutarlo si llega a ser igual o mayor el número de votos al número de la mitad de jugadores queda ejecutado (Se podrá hacer más de una nominación por día al igual que puede no hacerse ninguna pero solo se podrá ejecutar a una persona por día).
+Una vez que acaba la reunión inicia la noche aquí todos los jugadores seréis aislados y el narrador hablará con aquellas personas que tengan un rol que participe en la noche para cambiar el rumbo de la historia ya sea gente muerta o más sucesos que les esperan.
+Y cuando la noche acaba el narrador anuncia los hechos principales en la noche y se sigue jugando.</p>
+            <p>Por último morir en este juego no es el fin podrás seguir participando en las conversaciones como fantasma pero tu rol se desactivará y aparte solo podrás votar en solo una nominación el resto de la partida, será tu voto fantasmal.</p>
+        </div>
+        <div class="contenido-juego">
+            <div id="lista-roles-jugadores" class="lista-referencia">
+                <p style="text-align: center; margin-top: 20px;">Esperando al Narrador...</p>
+            </div>
+            <h2 style="text-align: center; font-family: 'Cinzel'; margin: 10px 0;">Estado de la Aldea</h2>
+            <div id="grimorio-publico" class="contenedor-grimorio-jugadores">
+                <p style="position: absolute; top: 45%; width: 100%; text-align: center;">Esperando al GM...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="jugadores.js"></script>
+</body>
+</html>
