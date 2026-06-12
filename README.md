@@ -32,3 +32,5 @@ Y por ultimo el administrador copiará ese mismo enlace nuevo pero le añadirá 
 ![Imagen juego](Frontend/imagenes/foto3.png)
 
 *Recomiendo jugarlo en discord.*
+
+![Imagen juego](Frontend/imagenes/foto4.png)
