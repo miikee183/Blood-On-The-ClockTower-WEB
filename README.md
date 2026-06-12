@@ -2,7 +2,7 @@
 
 Es uno de los mejores juegos de mesa de roles ocultos, el problema que tiene es que cuesta aproximadamente 150$ aparte que está descatalogado.
 
-![Imagen juego](Frontend/imagenes/readmeFoto.png)
+![Imagen juego](Frontend/imagenes/ReadmeFoto.png)
 
 # Objetivo
 
