@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FRONTEND_DIR = os.path.join(BASE_DIR, '../Fontend')
+FRONTEND_DIR = os.path.join(BASE_DIR, '../Frontend')
 HTML_DIR = os.path.join(FRONTEND_DIR, 'html')
 
 app = Flask(__name__, static_folder=FRONTEND_DIR)
