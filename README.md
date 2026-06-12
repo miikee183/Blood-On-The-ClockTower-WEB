@@ -2,7 +2,7 @@
 
 Es uno de los mejores juegos de mesa de roles ocultos, el problema que tiene es que cuesta aproximadamente 150$ aparte que está descatalogado.
 
-![Imagen juego]([https://ejemplo.com/imagen.jpg](https://b1803394.smushcdn.com/1803394/wp-content/uploads/2022/10/blood-clocktower-review-header-990x557.jpg?lossy=1&strip=1&webp=1))
+![Imagen juego]([[https://ejemplo.com/imagen.jpg](https://b1803394.smushcdn.com/1803394/wp-content/uploads/2022/10/blood-clocktower-review-header-990x557.jpg?lossy=1&strip=1&webp=1)](https://muevecubos.com/pic/00/pic_382656.jpg))
 
 # Objetivo
 
