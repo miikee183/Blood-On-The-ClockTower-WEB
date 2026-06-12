@@ -214,7 +214,7 @@ body {
     position: relative;
     width: 100%;
     background-color: #1a0a0a;
-    background-image: url('imagenes/fondo.png');
+    background-image: url('/imagenes/fondo.png');
     background-size: cover;
     background-position: center;
 }
