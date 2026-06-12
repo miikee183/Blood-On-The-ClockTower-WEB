@@ -33,6 +33,4 @@ Y por ultimo el administrador copiará ese mismo enlace nuevo pero le añadirá 
 
 *Recomiendo jugarlo en discord.*
 
-<p align="center">
-  <img src="frontend/static/img/foto4.png" alt="discord" width="350">
-</p>
+<img src="frontend/imagenes/foto4.png" alt="discord" width="350">
