@@ -23,4 +23,4 @@ Descargamos ngrok, luego ejecutamos el backend que es app.py, luego copiamos la 
 Este comando generará el enlace público lo copiamos y se lo mandamos a todos los jugadores.
 Y por ultimo el administrador copiará ese mismo enlace nuevo pero le añadirá juego.html al final para entrar en la ventana de administrador.
 
-Y a jugar, recomiendo jugarlo en discord.
+*Recomiendo jugarlo en discord.*
