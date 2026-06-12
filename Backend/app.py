@@ -2,7 +2,11 @@ from flask import Flask, render_template, send_from_directory, request
 from flask_socketio import SocketIO, emit
 import os
 
-app = Flask(__name__, static_folder='.')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, '../Fontend')
+HTML_DIR = os.path.join(FRONTEND_DIR, 'html')
+
+app = Flask(__name__, static_folder=FRONTEND_DIR)
 app.config['SECRET_KEY'] = 'botc_secret'
 
 usuarios_conectados = {} # sid: nombre
@@ -23,15 +27,16 @@ estado_partida = {
 
 @app.route('/')
 def index():
-    return send_from_directory('.', 'jugadores.html')
+    return send_from_directory(HTML_DIR, 'jugadores.html')
 
 @app.route('/gm')
+@app.route('/Juego.html')
 def gm_panel():
-    return send_from_directory('.', 'Juego.html')
+    return send_from_directory(HTML_DIR, 'Juego.html')
 
 @app.route('/<path:path>')
 def static_files(path):
-    return send_from_directory('.', path)
+    return send_from_directory(FRONTEND_DIR, path)
 
 @socketio.on('connect')
 def handle_connect():
