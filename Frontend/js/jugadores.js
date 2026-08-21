@@ -48,6 +48,7 @@ const socket = io();
             const input = document.getElementById('input-usuario');
             const nombre = input.value.trim();
             if (nombre === "") return;
+            if (nombre.length > 12) { alert("El nombre no puede tener más de 12 caracteres."); return; }
             socket.emit('registro-nombre', nombre, (success) => {
                 if (success) {
                     miNombre = nombre;

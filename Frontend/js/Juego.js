@@ -1,86 +1,19 @@
 const socket = io();
 
-// Catálogos de roles
-const EDICIONES = {
-    TB: [
-        { nombre: "Diablillo", tipo: "demonio", efecto: "none", info: "Puede matar a un jugador todas las noches, sé puede matar así mismo para que uno de sus esbirros se convierta en el demonio.", emoji: "🔱" },
-        { nombre: "Envenenador", tipo: "esbirro", efecto: "Envenenado", info: "Todas las noches podrá envenenar a un jugador, este jugador puede recibir información falsa.", emoji: "🧪" },
-        { nombre: "Espía", tipo: "esbirro", efecto: "none", info: "Podrá ver todas las noches el grimorio. (Ve los roles de cada uno) es percibido como pueblo para los demás jugadores", emoji: "👁️" },
-        { nombre: "Mujer Escarlata", tipo: "esbirro", efecto: "none", info: "Si el demonio es eliminado, pasa a ser el demonio si al menos hay 5 jugadores vivos.", emoji: "💋" },
-        { nombre: "Barón", tipo: "esbirro", efecto: "none", info: "Si hay un barón en la partida le toca al narrador añadir 2 Forasteros en la partida en vez de 2 roles del Pueblo.", emoji: "🎩" },
-        { nombre: "Lavandera", tipo: "pueblerino", efecto: "Lavandera-Info", info: "En la primera noche sabrá un rol de pueblo que tiene 1 entre 2 jugadores.", emoji: "👖" },
-        { nombre: "Bibliotecario", tipo: "pueblerino", efecto: "Bibliotecario-Info", info: "En la primera noche sabrá un rol de forastero que tiene 1 entre 2 jugadores.", emoji: "📖" },
-        { nombre: "Investigador", tipo: "pueblerino", efecto: "Investigador-Info", info: "En la primera noche sabrá un rol de esbirro que tiene 1 entre 2 jugadores.", emoji: "🔍" },
-        { nombre: "Chef", tipo: "pueblerino", efecto: "none", info: "En la primera noche sabrá si hay roles malos juntos en la mesa (si hay 2 juntos se le dirá 1 si hay 3 se le dirá 2 y si hay 2 parejas separadas se le dirá igual 2).", emoji: "🧑‍🍳" },
-        { nombre: "Empático", tipo: "pueblerino", efecto: "none", info: "Todas las noches sabrá el número de jugadores malvados que hay a su lado.", emoji: "💗" },
-        { nombre: "Pitonisa", tipo: "pueblerino", efecto: "Pitonisa-Falsa", info: "Elige 2 jugadores, sabrás si uno es el demonio, pero un jugador bueno será identificado como demonio también por ti.", emoji: "🔮" },
-        { nombre: "Enterrador", tipo: "pueblerino", efecto: "Visto-Hoy", info: "Si se ejecuta a alguien se enterá esa noche del rol del ejecutado.", emoji: "⚰️" },
-        { nombre: "Monje", tipo: "pueblerino", efecto: "Protegido", info: "Todas las noches elige a un jugador, ese jugador es inmune a ataques de demonio (No puede elegirse así mismo).", emoji: "✝️" },
-        { nombre: "Guardián de cuervos", tipo: "pueblerino", efecto: "none", info: "Si muere por el demonio, esa misma noche elige a alguien y sabrá su rol.", emoji: "🐦‍⬛" },
-        { nombre: "Virgen", tipo: "pueblerino", efecto: "none", info: "Si uno del pueblo la nomina, este es ejecutado instantaneamente.", emoji: "💍" },
-        { nombre: "Exterminador", tipo: "pueblerino", efecto: "Gastado", info: "Si elige al demonio públicamente por el día, lo elimina, pero solo tiene una oportunidad ya que solo tiene una bala.", emoji: "🏹" },
-        { nombre: "Soldado", tipo: "pueblerino", efecto: "none", info: "Es inmune a los ataques del demonio.", emoji: "🛡️" },
-        { nombre: "Alcalde", tipo: "pueblerino", efecto: "none", info: "Si por la noche el demonio intenta matar al alcalde el narrador puede cambiar a la víctima del asesinato. Cuando quedan 3 jugadores si uno es el alcalde en la fase de ejecución si no se ejecuta a nadie gana el pueblo.", emoji: "🏦" },
-        { nombre: "Mayordomo", tipo: "forastero", efecto: "Patrón", info: "Todas las noches elige a su maestro, el mayordomo solo podrá votar en ejecuciones si su maestro está votando en ese momento.", emoji: "🛎️" },
-        { nombre: "Santo", tipo: "forastero", efecto: "none", info: "Si es ejecutado, ganan los malos.", emoji: "🪽" },
-        { nombre: "Recluso", tipo: "forastero", efecto: "none", info: "Puede ser identificado tanto como demonio, esbirro, forastero o pueblo para todos los jugadores.", emoji: "🕯️" },
-        { nombre: "Borracho", tipo: "forastero", efecto: "none", info: "Este rol es un segundo rol que tendrá un jugador (no lo pueden tener los demonios), hace que su primer rol no funcione. (El jugador sabrá cual es su primer rol pero nunca sabrá si es el borracho).", emoji: "🍺" }
-    ],
-    BMR: [
-        { nombre: "Zombuul", tipo: "demonio", efecto: "Muerto-Una-Vez", info: "Si lo ejecutan no muere (seguirá atacando) pero todos pensaran que sí, solo morirá si lo ejecutan por segunda vez.", emoji: "🧟" },
-        { nombre: "Pukka", tipo: "demonio", efecto: "Picadura", info: "Cada noche envenena mortalmente a un jugador, la noche siguiente muere es jugador envenenado.", emoji: "🔱" },
-        { nombre: "Shabaloth", tipo: "demonio", efecto: "none", info: "Puede comerse a 2 jugadores cada noche pero el narrador puede elegir si resucitar a uno de los 2 (vomitar).", emoji: "👅" },
-        { nombre: "Po", tipo: "demonio", efecto: "Tres-Ataques", info: "Puede matar a 3 en una noche si la noche anterior no mata a nadie.", emoji: "🩸" },
-        { nombre: "Padrino", tipo: "esbirro", efecto: "Padrino-Info", info: "Sabe que forasteros están en juego si uno de ellos muere, el Padrino podrá matar.", emoji: "🌹" },
-        { nombre: "Asesino", tipo: "esbirro", efecto: "Asesino-Gastado", info: "Podrá matar a alguien por partida, está muerte es inevitable el jugador muere si o si.", emoji: "🔪" },
-        { nombre: "Mente Maestra", tipo: "esbirro", efecto: "none", info: "Si se ejecuta al demonio nadie lo sabe, al día siguiente si se intenta ejecutar a un jugador bueno el mal ganá si no se intenta ejecutar a nadie o a un esbirro el bien gana.", emoji: "🎩" },
-        { nombre: "Abogado del diablo", tipo: "esbirro", efecto: "Defendido", info: "Cada noche elige alguien, hará inmune a las ejecuciones a ese jugador.", emoji: "⚖️" },
-        { nombre: "Abuela", tipo: "pueblerino", efecto: "Nieto", info: "La abuela sabrá quien es su nieto y su rol que será uno de los buenos pero el nieto no sabe que tiene abuela, si el nieto es asesinado por un demonio la abuela morirá pero por otro tipo de muerte no pasa nada.", emoji: "👵" },
-        { nombre: "Camarera", tipo: "pueblerino", efecto: "CamareraInfo", info: "Elige a 2 jugadores y sabrá si ellos se levantaron la misma noche que ella.", emoji: "🧹" },
-        { nombre: "Marinero", tipo: "pueblerino", efecto: "Embriaguez", info: "Elige a un jugador, él o el jugador elegido se emborrachara si el emborrachado es el marinero será inmortal mientras esté borracho.", emoji: "⚓" },
-        { nombre: "Exorcista", tipo: "pueblerino", efecto: "Elegido", info: "Elige un jugador si es el demonio esa noche no despertará, pero sabrá que eres el Exorcista. no puede elegir al mismo de seguido", emoji: "✝️" },
-        { nombre: "Posadero", tipo: "pueblerino", efecto: "Hospedado", info: "Elige 2 jugadores los protegerás esa noche pero uno de ellos se emborracha un día.", emoji: "🍺" },
-        { nombre: "Apostador", tipo: "pueblerino", efecto: "none", info: "Todas las noches puede elegir a un jugador si adivina su rol no pasa nada, si lo falla el mismo muere.", emoji: "🎲" },
-        { nombre: "Chismoso", tipo: "pueblerino", efecto: "none", info: "Puede decir un anuncio públicamente por el día si es cierto el narrador podrá eliminar a alguien la próxima noche.", emoji: "👂" },
-        { nombre: "Cortesana", tipo: "pueblerino", efecto: "Abstemia", info: "Solo una vez en la partida podrá elegir un rol, si ese rol está en juego el jugador del rol quedará borracho durante 3 días.", emoji: "🍷" },
-        { nombre: "Profesor", tipo: "pueblerino", efecto: "Sin-Carga", info: "Solo una vez en la partida podrá elegir a un muerto para resucitarlo, solo resucitará si es del pueblo ese jugador recuperará su habilidad.", emoji: "💉" },
-        { nombre: "Trovador", tipo: "pueblerino", efecto: "Melodía", info: "Si un esbirro muere por el día, los demás jugadores excepto el trovador, quedan borrachos durante la noche y el próximo día.", emoji: "👼" },
-        { nombre: "Señora del té", tipo: "pueblerino", efecto: "Servido-Té", info: "Si los jugadores que están al lado suya son buenos, son inmortales, pero tienen que ser los 2, si es uno no será inmortal.", emoji: "🫖" },
-        { nombre: "Pacifista", tipo: "pueblerino", efecto: "none", info: "Si hay un pacifista en partida, el narrador puede perdonar una ejecución a un jugador bueno.", emoji: "🕊️" },
-        { nombre: "Bufón", tipo: "pueblerino", efecto: "none", info: "Si el bufón debería de morir por cualquier razón no muere la primera vez.", emoji: "🎭" },
-        { nombre: "Matón", tipo: "forastero", efecto: "Matón-Borracho", info: "Es inmortal a todo, pero si alguien le elige con su habilidad lo emborracha un día además el matón pasa al bando del jugador emborrachado", emoji: "👊" },
-        { nombre: "Lunático", tipo: "forastero", efecto: "none", info: "Cree que es el demonio, el narrador le da nombres de esbirros falsos y cree que está matando ya que el diablo sabe a quien elige el lunático.", emoji: "🌀" },
-        { nombre: "Hija de la luna", tipo: "forastero", efecto: "Sentenciado", info: "Si es ejecutada elige a un jugador si es bueno, esa misma noche el jugador elegido morirá.", emoji: "🌙" },
-        { nombre: "Chatarrero", tipo: "forastero", efecto: "none", info: "Puede morir en cualquier momento si el narrador quiere.", emoji: "🚚" }
-    ],
-    SV: [
-        { nombre: "Vortox", tipo: "demonio", efecto: "none", info: "Toda la información que recibe los buenos es falsa, si no se ejecuta a nadie un día los malos ganan,", emoji: "🌪️" },
-        { nombre: "Fang Gu", tipo: "demonio", efecto: "Infectado", info: "Salta a un forastero.", emoji: "🫴" },
-        { nombre: "Vigormortis", tipo: "demonio", efecto: "Necrosis", info: "Mata esbirros para darles poder.", emoji: "💀" },
-        { nombre: "No Dashii", tipo: "demonio", efecto: "Aturdimiento", info: "Su jugador de la derecha y de la izquierda quedan envenenados permanentemente.", emoji: "🐙" },
-        { nombre: "Madrasta del foso", tipo: "esbirro", efecto: "none", info: "Cambia roles.", emoji: "🔮" },
-        { nombre: "Cerenovus", tipo: "esbirro", efecto: "Locura", info: "Fuerza a fingir rol.", emoji: "🧠" },
-        { nombre: "Gemelo Malvado", tipo: "esbirro", efecto: "Gemelo", info: "El bien no gana si ambos viven.", emoji: "👥" },
-        { nombre: "Bruja", tipo: "esbirro", efecto: "Maldecido", info: "Maldito muere si nomina.", emoji: "🧹" },
-        { nombre: "Relojero", tipo: "pueblerino", efecto: "Encantado", info: "Distancia al esbirro.", emoji: "🕰️" },
-        { nombre: "Encantador de serpientes", tipo: "pueblerino", efecto: "Encantado", info: "Intercambia rol con demonio.", emoji: "🐍" },
-        { nombre: "Erudito", tipo: "pueblerino", efecto: "none", info: "Dato real y falso.", emoji: "🧑‍🦽‍➡️" },
-        { nombre: "Costurera", tipo: "pueblerino", efecto: "Costura-Hecha", info: "Sabe bando de 2.", emoji: "🧶" },
-        { nombre: "Florista", tipo: "pueblerino", efecto: "Votó-Demonio", info: "Votó el demonio?", emoji: "💐" },
-        { nombre: "Pregonero", tipo: "pueblerino", efecto: "Nominó-Esbirro", info: "Nominó esbirro?", emoji: "🔔" },
-        { nombre: "Oráculo", tipo: "pueblerino", efecto: "none", info: "Sabe malos muertos.", emoji: "👁️" },
-        { nombre: "Soñador", tipo: "pueblerino", efecto: "none", info: "Ve 2 roles (1 real).", emoji: "💫" },
-        { nombre: "Artista", tipo: "pueblerino", efecto: "Preguntado", info: "Pregunta Sí/No.", emoji: "🖌️" },
-        { nombre: "Malabarista", tipo: "pueblerino", efecto: "Malabares", info: "Adivina roles día 1.", emoji: "🎳" },
-        { nombre: "Sabio", tipo: "pueblerino", efecto: "none", info: "Sabe quién le mató.", emoji: "🕯️" },
-        { nombre: "Matemático", tipo: "pueblerino", efecto: "none", info: "Sabe cuántos fallos de info hubo.", emoji: "📐" },
-        { nombre: "Filósofo", tipo: "pueblerino", efecto: "Copiando", info: "Copia un poder.", emoji: "📖" },
-        { nombre: "Patoso", tipo: "forastero", efecto: "none", info: "Si elige mal al morir, pierden.", emoji: "🍌" },
-        { nombre: "Barbero", tipo: "forastero", efecto: "Corte-Pelo", info: "Demonio cambia roles al morir barbero.", emoji: "✂️" },
-        { nombre: "Cariño", tipo: "forastero", efecto: "Duelo", info: "Al morir, un bueno se emborracha.", emoji: "🎀" },
-        { nombre: "Mutante", tipo: "forastero", efecto: "none", info: "No puede decir que es forastero.", emoji: "🎪" }
-    ]
-};
+// Catálogo de roles (se carga dinámicamente desde ediciones.json)
+let EDICIONES = {};
+
+async function cargarEdiciones() {
+    try {
+        const response = await fetch('/data/ediciones.json');
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        EDICIONES = await response.json();
+        console.log('✅ Ediciones cargadas correctamente desde JSON.');
+    } catch (error) {
+        console.error('❌ Error al cargar ediciones.json:', error);
+        alert('Error crítico: No se pudieron cargar los roles. Recarga la página.');
+    }
+}
 
 let ROLES_TOTALES_CATALOGO = []; 
 let ROLES_ACTUALES_DISPONIBLES = []; 
@@ -95,7 +28,8 @@ const TABLA_COMPOSICION = {
     13: { p: 9, f: 0, e: 3, d: 1 }, 14: { p: 9, f: 1, e: 3, d: 1 }, 15: { p: 9, f: 2, e: 3, d: 1 },
 };
 
-window.onload = function() {
+window.onload = async function() {
+    await cargarEdiciones();
     limpiarDatosJugadores();
 };
 
