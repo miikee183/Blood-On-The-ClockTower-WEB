@@ -22,7 +22,9 @@ estado_partida = {
     "estadosJugadores": {"lista": []},
     "nombres_conectados": [],
     "votacion_activa": False,
-    "votos_actuales": []
+    "votos_actuales": [],
+    "mendigo_nombre": "",
+    "votos_mendigo_recibidos": []
 }
 
 @app.route('/')
@@ -96,6 +98,24 @@ def handle_lunatico_falso(data):
 def handle_roles_fuera(roles):
     emit('ver-roles-fuera', roles, broadcast=True)
 
+@socketio.on('setup-mendigo')
+def handle_setup_mendigo(nombre):
+    estado_partida["mendigo_nombre"] = nombre
+    estado_partida["votos_mendigo_recibidos"] = []
+    emit('mendigo-presente', nombre, broadcast=True)
+
+@socketio.on('dar-voto-mendigo')
+def handle_dar_voto_mendigo(donor):
+    mendigo = estado_partida["mendigo_nombre"]
+    if mendigo and donor not in estado_partida["votos_mendigo_recibidos"]:
+        estado_partida["votos_mendigo_recibidos"].append(donor)
+        # Notify the GM to determine alignment
+        emit('voto-dado-al-mendigo', donor, broadcast=True)
+
+@socketio.on('resultado-voto-mendigo')
+def handle_resultado_voto_mendigo(data):
+    emit('recibir-info-voto-mendigo', data, broadcast=True)
+
 @socketio.on('iniciar-votacion-global')
 def handle_iniciar_voto():
     estado_partida["votacion_activa"] = True
@@ -121,6 +141,8 @@ def handle_reset():
     estado_partida["estadosJugadores"] = {"lista": []}
     estado_partida["votacion_activa"] = False
     estado_partida["votos_actuales"] = []
+    estado_partida["mendigo_nombre"] = ""
+    estado_partida["votos_mendigo_recibidos"] = []
     roles_asignados = {}
     emit('partida-reseteada', broadcast=True)
 

@@ -189,6 +189,7 @@ body {
 .btn-rol-selector.selected.forastero { background-color: #093267; color: white; border-color: #0047ab; box-shadow: 0 0 10px #093267; }
 .btn-rol-selector.selected.esbirro { background-color: #8e1a1a; color: white; border-color: #b01a1a; box-shadow: 0 0 10px #8e1a1a; }
 .btn-rol-selector.selected.demonio { background-color: #540c0c; color: white; border-color: #951212; box-shadow: 0 0 10px #540c0c; }
+.btn-rol-selector.selected.viajero { background: linear-gradient(135deg, #8e1a1a 50%, #0e3693 50%); color: white; border-color: #5522aa; box-shadow: 0 0 10px #661a55; }
 
 .btn-rol-selector.selected.borracho-btn { 
     background: linear-gradient(180deg, #e3a018 0%, #9e6b00 100%); 
@@ -341,6 +342,7 @@ body {
 .bg-rojo { background-color: #8e1a1a !important; border-color: #b01a1a; } 
 .bg-carmesí { background-color: #620b0b !important; color: white; }
 .bg-carmesí { background-color: #540c0c !important; border-color: #951212; } 
+.bg-viajero { background: linear-gradient(135deg, #8e1a1a 50%, #0e3693 50%) !important; border-color: #5522aa; color: white; }
 .bg-lunatico { 
     background-color: #8a2be2 !important; /* Morado intenso */
     color: white; 

@@ -58,7 +58,35 @@
 
     <div id="sticky-rol-info"></div>
 
+    <div id="panel-mendigo" style="display:none; position: fixed; bottom: 80px; right: 30px; background: rgba(0,0,0,0.9); border: 2px solid #5522aa; padding: 15px; border-radius: 10px; color: #ffd700; font-family: 'Cinzel', serif; box-shadow: 0 0 15px #661a55; z-index: 1400;">
+        Votos disponibles: <strong id="num-votos-mendigo" style="font-size: 1.5em; color: white;">0</strong>
+    </div>
+
+    <div id="modal-voto-mendigo" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3000; display: none; animation: fadeIn 0.4s ease;">
+        <div class="card-rol-asignado viajero" style="width: 280px;">
+            <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase; letter-spacing: 2px;">Voto Recibido</div>
+            <div id="mendigo-voto-emoji" style="font-size: 2.5em; margin: 10px 0;">🤲</div>
+            <div id="mendigo-voto-donor" style="font-size: 1.3em; color: #ffd700; margin-bottom: 8px;"></div>
+            <div style="font-size: 0.85em; color: #ccc; margin-bottom: 5px;">te ha donado su voto fantasmal</div>
+            <div style="margin-top: 12px; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,215,0,0.3); background: rgba(0,0,0,0.4);">
+                <div style="font-size: 0.75em; color: #aaa; text-transform: uppercase; letter-spacing: 1px;">Bando del donante</div>
+                <div id="mendigo-voto-bando" style="font-size: 1.4em; font-weight: bold; margin-top: 5px;"></div>
+            </div>
+            <button class="btn-principal" style="margin-top: 20px; width: 100%;" onclick="cerrarModalVotoMendigo()">Entendido</button>
+        </div>
+    </div>
+
+    <div id="modal-donacion-mendigo" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3000; display: none; animation: fadeIn 0.4s ease;">
+        <div class="card-rol-asignado" style="width: 260px; border-color: #5522aa; box-shadow: 0 0 20px #661a55;">
+            <div style="font-size: 2em; margin-bottom: 10px;">🤲</div>
+            <div style="font-size: 1.1em; color: #e0b0ff;">Has donado tu voto fantasmal al Mendigo</div>
+            <div style="font-size: 0.85em; color: #888; margin-top: 8px;">Ya no podrás votar en el resto de la partida.</div>
+            <button class="btn-principal" style="margin-top: 20px; width: 100%;" onclick="document.getElementById('modal-donacion-mendigo').style.display='none'">Entendido</button>
+        </div>
+    </div>
+
     <div id="voto-btn-container" class="voto-btn-container">
+        <button id="btn-dar-voto-mendigo" class="btn-secundario" style="display:none; width: 100%; margin-bottom: 5px; border-color: #5522aa; color: #e0b0ff;" onclick="ejecutarVotoMendigo()">Dar Voto al Mendigo</button>
         <button id="btn-votar" class="btn-principal" onclick="ejecutarVoto()">VOTAR</button>
     </div>
 

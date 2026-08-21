@@ -11,6 +11,31 @@ const socket = io();
         let llamadaPendingData = null;
         let muted = false;
         let votoFantasmalUsado = false;
+        
+        let soyMendigo = false;
+        let hayMendigoEnPartida = false;
+        let votosDisponiblesMendigo = 0;
+        let votoDadoAlMendigo = false;
+
+        // Cola de notificaciones del Mendigo
+        let colaMendigoVotos = [];
+        let modalMendigoAbierto = false;
+
+        function mostrarSiguienteVotoMendigo() {
+            if (colaMendigoVotos.length === 0) { modalMendigoAbierto = false; return; }
+            modalMendigoAbierto = true;
+            const data = colaMendigoVotos.shift();
+            document.getElementById('mendigo-voto-donor').textContent = data.donor;
+            const bandoEl = document.getElementById('mendigo-voto-bando');
+            bandoEl.textContent = data.bando;
+            bandoEl.style.color = data.bando === 'Bueno' ? '#4ee44e' : '#ff4444';
+            document.getElementById('modal-voto-mendigo').style.display = 'block';
+        }
+
+        function cerrarModalVotoMendigo() {
+            document.getElementById('modal-voto-mendigo').style.display = 'none';
+            mostrarSiguienteVotoMendigo();
+        }
 
         async function actualizarListaMicros() {
             const selector = document.getElementById('selector-microfono');
@@ -96,7 +121,10 @@ const socket = io();
             if (data.target === miNombre) {
                 miTipoRol = data.tipo;
                 miNombreDeRol = data.nombre;
-                const catMap = { "demonio": "Demonio", "esbirro": "Esbirro", "pueblerino": "Pueblo", "forastero": "Forastero" };
+                
+                if (miNombreDeRol === "Mendigo") soyMendigo = true;
+
+                const catMap = { "demonio": "Demonio", "esbirro": "Esbirro", "pueblerino": "Pueblo", "forastero": "Forastero", "viajero": "Viajero" };
                 document.getElementById('privado-categoria').textContent = catMap[data.tipo] || "";
                 document.getElementById('card-inner').className = `card-rol-asignado ${data.tipo}`;
                 document.getElementById('privado-emoji').textContent = data.emoji;
@@ -194,26 +222,83 @@ socket.on('info-falsa-lunatico', (data) => {
             }
         });
 
+        socket.on('mendigo-presente', (nombre) => {
+            hayMendigoEnPartida = true;
+            if (miNombre === nombre) {
+                document.getElementById('panel-mendigo').style.display = 'block';
+            }
+        });
+
         function ejecutarVoto() {
             const btn = document.getElementById('btn-votar');
-            if (miEstado !== "Vivo") votoFantasmalUsado = true;
+            if (soyMendigo) {
+                if (votosDisponiblesMendigo <= 0) return;
+                votosDisponiblesMendigo--;
+                document.getElementById('num-votos-mendigo').textContent = votosDisponiblesMendigo;
+            } else {
+                if (miEstado !== "Vivo") votoFantasmalUsado = true;
+                document.getElementById('btn-dar-voto-mendigo').style.display = 'none';
+            }
             socket.emit('registrar-voto', miNombre);
             btn.disabled = true; btn.textContent = "VOTO ENVIADO"; btn.style.filter = "grayscale(1)";
         }
 
+        function ejecutarVotoMendigo() {
+            votoDadoAlMendigo = true;
+            votoFantasmalUsado = true; // Se consume el voto fantasmal
+            socket.emit('dar-voto-mendigo', miNombre);
+            document.getElementById('btn-dar-voto-mendigo').style.display = 'none';
+            const btnVotar = document.getElementById('btn-votar');
+            btnVotar.disabled = true; btnVotar.textContent = "VOTO DONADO"; btnVotar.style.filter = "grayscale(1)";
+            document.getElementById('modal-donacion-mendigo').style.display = 'block';
+        }
+
+        socket.on('recibir-info-voto-mendigo', (data) => {
+            if (soyMendigo && data.donor) {
+                votosDisponiblesMendigo++;
+                document.getElementById('num-votos-mendigo').textContent = votosDisponiblesMendigo;
+                
+                colaMendigoVotos.push(data);
+                if (!modalMendigoAbierto) mostrarSiguienteVotoMendigo();
+                
+                // Si la votación está activa, rehabilita el botón
+                if (document.getElementById('voto-btn-container').style.display === 'block') {
+                    const btn = document.getElementById('btn-votar');
+                    btn.disabled = false; btn.textContent = "VOTAR"; btn.style.filter = "none";
+                }
+            }
+        });
+
         socket.on('votacion-iniciada', () => {
             const container = document.getElementById('voto-btn-container');
-            const btn = document.getElementById('btn-votar');
-            if (miEstado !== "Vivo" && votoFantasmalUsado) {
-                btn.disabled = true; btn.textContent = "VOTO USADO";
+            const btnVotar = document.getElementById('btn-votar');
+            const btnDonar = document.getElementById('btn-dar-voto-mendigo');
+
+            if (soyMendigo) {
+                if (votosDisponiblesMendigo > 0) {
+                    btnVotar.disabled = false; btnVotar.textContent = "VOTAR"; btnVotar.style.filter = "none";
+                } else {
+                    btnVotar.disabled = true; btnVotar.textContent = "SIN VOTOS"; btnVotar.style.filter = "grayscale(1)";
+                }
             } else {
-                btn.disabled = false; btn.textContent = "VOTAR"; btn.style.filter = "none";
+                if (miEstado !== "Vivo" && votoFantasmalUsado) {
+                    btnVotar.disabled = true; btnVotar.textContent = "VOTO USADO";
+                } else {
+                    btnVotar.disabled = false; btnVotar.textContent = "VOTAR"; btnVotar.style.filter = "none";
+                }
+                
+                if (hayMendigoEnPartida && miEstado !== "Vivo" && !votoFantasmalUsado && !votoDadoAlMendigo) {
+                    btnDonar.style.display = 'block';
+                } else {
+                    btnDonar.style.display = 'none';
+                }
             }
             container.style.display = 'block';
         });
 
         socket.on('votacion-finalizada', () => {
             document.getElementById('voto-btn-container').style.display = 'none';
+            document.getElementById('btn-dar-voto-mendigo').style.display = 'none';
             document.querySelectorAll('.jugador-publico').forEach(el => el.classList.remove('ha-votado'));
         });
 
@@ -308,10 +393,11 @@ socket.on('info-falsa-lunatico', (data) => {
         "demonio": "Demonios", 
         "esbirro": "Esbirros", 
         "pueblerino": "Pueblo", 
-        "forastero": "Forasteros" 
+        "forastero": "Forasteros",
+        "viajero": "Viajeros"
     };
 
-    ["demonio", "esbirro", "pueblerino", "forastero"].forEach(tipo => {
+    ["demonio", "esbirro", "pueblerino", "forastero", "viajero"].forEach(tipo => {
         const filtrados = rolesData.filter(r => r.tipo === tipo);
         if (filtrados.length > 0) {
             const t = document.createElement('div');

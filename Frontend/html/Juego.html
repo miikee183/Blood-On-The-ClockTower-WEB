@@ -110,6 +110,16 @@
         </div>
     </div>
 
+    <div id="modal-donacion-gm" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3000; display: none; animation: fadeIn 0.4s ease;">
+        <div style="background: #0d0d0d; border: 3px solid #5522aa; padding: 25px; border-radius: 15px; width: 280px; box-shadow: 0 0 30px rgba(0,0,0,1), 0 0 15px #661a55; text-align: center; color: white; font-family: 'Cinzel', serif;">
+            <div style="font-size: 0.7em; color: #aaa; text-transform: uppercase; letter-spacing: 2px;">Donación de Voto</div>
+            <div style="font-size: 2.5em; margin: 10px 0;">🤲</div>
+            <div id="gm-donor-nombre" style="font-size: 1.3em; color: #ffd700; margin-bottom: 8px;"></div>
+            <div style="font-size: 0.9em; color: #ccc;">ha donado su voto fantasmal al Mendigo</div>
+            <button class="btn-principal" style="margin-top: 20px; width: 100%;" onclick="cerrarModalDonacionGM()">Entendido</button>
+        </div>
+    </div>
+
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="/js/Juego.js"></script>
 </body>

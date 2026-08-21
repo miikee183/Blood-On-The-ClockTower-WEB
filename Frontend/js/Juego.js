@@ -82,7 +82,8 @@ function renderizarRolesPorSecciones(roles, contenedorId, contadorId, callbackOn
     contenedor.innerHTML = '';
     const ordenCategorias = [
         { id: "demonio", titulo: "Demonios" }, { id: "esbirro", titulo: "Esbirros" },
-        { id: "pueblerino", titulo: "Pueblo" }, { id: "forastero", titulo: "Forasteros" }
+        { id: "pueblerino", titulo: "Pueblo" }, { id: "forastero", titulo: "Forasteros" },
+        { id: "viajero", titulo: "Viajeros" }
     ];
     ordenCategorias.forEach(cat => {
         const rolesFiltrados = roles.filter(r => r.tipo === cat.id);
@@ -370,6 +371,7 @@ function asignarRolesAleatorios() {
             else if (infoRolReal.tipo === "demonio") display.classList.add('bg-carmesí');
             else if (infoRolReal.tipo === "esbirro") display.classList.add('bg-rojo');
             else if (infoRolReal.tipo === "forastero") display.classList.add('bg-cobalto');
+            else if (infoRolReal.tipo === "viajero") display.classList.add('bg-viajero');
             else display.classList.add('bg-azul');
         }
 
@@ -386,6 +388,10 @@ function asignarRolesAleatorios() {
             tipo: rolAEnviar.tipo, 
             emoji: rolAEnviar.emoji
         });
+
+        if (data.rol === "Mendigo") {
+            socket.emit('setup-mendigo', nombreJug);
+        }
 
         const selectsEfectos = c.querySelectorAll('.estado-jugador.secundario');
         selectsEfectos.forEach((sel, idx) => {
@@ -486,6 +492,43 @@ function mostrarMaldad() {
 
     alert("Maldad enviada. Los malvados conocen a sus aliados y el Lunático ha sido engañado.");
 }
+
+let colaGmDonaciones = [];
+let modalGmDonacionAbierto = false;
+
+function mostrarSiguienteDonacionGM() {
+    if (colaGmDonaciones.length === 0) { modalGmDonacionAbierto = false; return; }
+    modalGmDonacionAbierto = true;
+    const nombre = colaGmDonaciones.shift();
+    document.getElementById('gm-donor-nombre').textContent = nombre;
+    document.getElementById('modal-donacion-gm').style.display = 'block';
+}
+
+function cerrarModalDonacionGM() {
+    document.getElementById('modal-donacion-gm').style.display = 'none';
+    mostrarSiguienteDonacionGM();
+}
+
+socket.on('voto-dado-al-mendigo', (donorName) => {
+    const containers = document.querySelectorAll('.jugador-container');
+    let donorRol = "";
+    containers.forEach(c => {
+        if(c.querySelector('.nombre-jugador').value === donorName) {
+            donorRol = c.querySelector('.rol-display').value;
+        }
+    });
+    if(donorRol) {
+        const infoRol = ROLES_TOTALES_CATALOGO.find(r => r.nombre === donorRol);
+        if (infoRol) {
+            const bando = ["pueblerino", "forastero"].includes(infoRol.tipo) ? "Bueno" : "Malvado";
+            socket.emit('resultado-voto-mendigo', { donor: donorName, bando: bando });
+        }
+    }
+
+    // Encolar y mostrar modal al GM
+    colaGmDonaciones.push(donorName);
+    if (!modalGmDonacionAbierto) mostrarSiguienteDonacionGM();
+});
 
 let chatActivoCon = "";
         let historialChats = {}; // { nombreJugador: [mensajes] }

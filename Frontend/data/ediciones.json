@@ -1,80 +1,617 @@
 {
     "TB": [
-        { "nombre": "Diablillo", "tipo": "demonio", "efecto": "none", "info": "Cada noche*, elige a un jugador: este muere. Si te matas a ti mismo de esta forma, un Esbirro se convierte en el Diablillo.", "emoji": "🔱" },
-        { "nombre": "Envenenador", "tipo": "esbirro", "efecto": "Envenenado", "info": "Cada noche, elige a un jugador: queda envenenado esta noche y durante el día de mañana lo que hace que su habilidad sea inutil.", "emoji": "🧪" },
-        { "nombre": "Espía", "tipo": "esbirro", "efecto": "none", "info": "Cada noche, ves el Grimorio. Puedes registrarte como Puebleo o Forastero, incluso si estás muerto.", "emoji": "👁️" },
-        { "nombre": "Mujer Escarlata", "tipo": "esbirro", "efecto": "none", "info": "Si hay 5 o más jugadores vivos y el Demonio muere, te conviertes en el Demonio. (Los Viajeros no cuentan).", "emoji": "💋" },
-        { "nombre": "Barón", "tipo": "esbirro", "efecto": "none", "info": "Si hay un barón el narrador añade 2 Forasteros adicionales en juego.", "emoji": "🎩" },
-        { "nombre": "Lavandera", "tipo": "pueblerino", "efecto": "Lavandera-Info", "info": "Empiezas sabiendo que 1 de 2 jugadores es un Pueblo específico.", "emoji": "👖" },
-        { "nombre": "Bibliotecario", "tipo": "pueblerino", "efecto": "Bibliotecario-Info", "info": "Empiezas sabiendo que 1 de 2 jugadores es un Forastero específico. (O que hay cero en juego).", "emoji": "📖" },
-        { "nombre": "Investigador", "tipo": "pueblerino", "efecto": "Investigador-Info", "info": "Empiezas sabiendo que 1 de 2 jugadores es un Esbirro específico.", "emoji": "🔍" },
-        { "nombre": "Chef", "tipo": "pueblerino", "efecto": "none", "info": "Empiezas sabiendo cuántas parejas de jugadores malvados hay sentados juntos.", "emoji": "🧑‍🍳" },
-        { "nombre": "Empático", "tipo": "pueblerino", "efecto": "none", "info": "Cada noche, aprendes cuántos de tus 2 vecinos vivos son malvados.", "emoji": "💗" },
-        { "nombre": "Pitonisa", "tipo": "pueblerino", "efecto": "Pitonisa-Falsa", "info": "Cada noche, elige 2 jugadores: aprendes si alguno es un Demonio. Hay un jugador bueno que se registra como Demonio para ti.", "emoji": "🔮" },
-        { "nombre": "Enterrador", "tipo": "pueblerino", "efecto": "Visto-Hoy", "info": "Cada noche, aprendes qué personaje murió por ejecución hoy.", "emoji": "⚰️" },
-        { "nombre": "Monje", "tipo": "pueblerino", "efecto": "Protegido", "info": "Cada noche, elige a un jugador (distinto a ti): está a salvo del Demonio esta noche.", "emoji": "✝️" },
-        { "nombre": "Guardián de cuervos", "tipo": "pueblerino", "efecto": "none", "info": "Si mueres por la noche, te despiertan para elegir a un jugador: descubres su rol.", "emoji": "🐦‍⬛" },
-        { "nombre": "Virgen", "tipo": "pueblerino", "efecto": "none", "info": "La primera vez que te nominan, si el nominador es un Pueblo, es ejecutado inmediatamente.", "emoji": "💍" },
-        { "nombre": "Exterminador", "tipo": "pueblerino", "efecto": "Gastado", "info": "Una vez por partida, durante el día, elige públicamente a un jugador: si es el Demonio, este muere.", "emoji": "🏹" },
-        { "nombre": "Soldado", "tipo": "pueblerino", "efecto": "none", "info": "Estás a salvo del Demonio (No puedes morir por las noches).", "emoji": "🛡️" },
-        { "nombre": "Alcalde", "tipo": "pueblerino", "efecto": "none", "info": "Si solo viven 3 jugadores y no hay ejecución, tu equipo gana. Si mueres por la noche, otro jugador podría morir en tu lugar si quiere el narrador.", "emoji": "🏦" },
-        { "nombre": "Mayordomo", "tipo": "forastero", "efecto": "Patrón", "info": "Cada noche, elige a un jugador (distinto a ti): mañana, solo podrás votar si él también está votando.", "emoji": "🛎️" },
-        { "nombre": "Santo", "tipo": "forastero", "efecto": "none", "info": "Si mueres por ejecución, tu equipo pierde.", "emoji": "🪽" },
-        { "nombre": "Recluso", "tipo": "forastero", "efecto": "none", "info": "Puedes registrarte como malvado y como Esbirro o Demonio, incluso si estás muerto.", "emoji": "🕯️" },
-        { "nombre": "Borracho", "tipo": "forastero", "efecto": "none", "info": "No sabes que eres el Borracho. Crees ser un rol diferente, pero no lo eres.", "emoji": "🍺" }
+        {
+            "nombre": "Diablillo",
+            "tipo": "demonio",
+            "efecto": "none",
+            "info": "Cada noche*, elige a un jugador: este muere. Si te matas a ti mismo de esta forma, un Esbirro se convierte en el Diablillo.",
+            "emoji": "🔱"
+        },
+        {
+            "nombre": "Envenenador",
+            "tipo": "esbirro",
+            "efecto": "Envenenado",
+            "info": "Cada noche, elige a un jugador: queda envenenado esta noche y durante el día de mañana lo que hace que su habilidad sea inutil.",
+            "emoji": "🧪"
+        },
+        {
+            "nombre": "Espía",
+            "tipo": "esbirro",
+            "efecto": "none",
+            "info": "Cada noche, ves el Grimorio. Puedes registrarte como Puebleo o Forastero, incluso si estás muerto.",
+            "emoji": "👁️"
+        },
+        {
+            "nombre": "Mujer Escarlata",
+            "tipo": "esbirro",
+            "efecto": "none",
+            "info": "Si hay 5 o más jugadores vivos y el Demonio muere, te conviertes en el Demonio. (Los Viajeros no cuentan).",
+            "emoji": "💋"
+        },
+        {
+            "nombre": "Barón",
+            "tipo": "esbirro",
+            "efecto": "none",
+            "info": "Si hay un barón el narrador añade 2 Forasteros adicionales en juego.",
+            "emoji": "🎩"
+        },
+        {
+            "nombre": "Lavandera",
+            "tipo": "pueblerino",
+            "efecto": "Lavandera-Info",
+            "info": "Empiezas sabiendo que 1 de 2 jugadores es un Pueblo específico.",
+            "emoji": "👖"
+        },
+        {
+            "nombre": "Bibliotecario",
+            "tipo": "pueblerino",
+            "efecto": "Bibliotecario-Info",
+            "info": "Empiezas sabiendo que 1 de 2 jugadores es un Forastero específico. (O que hay cero en juego).",
+            "emoji": "📖"
+        },
+        {
+            "nombre": "Investigador",
+            "tipo": "pueblerino",
+            "efecto": "Investigador-Info",
+            "info": "Empiezas sabiendo que 1 de 2 jugadores es un Esbirro específico.",
+            "emoji": "🔍"
+        },
+        {
+            "nombre": "Chef",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Empiezas sabiendo cuántas parejas de jugadores malvados hay sentados juntos.",
+            "emoji": "🧑‍🍳"
+        },
+        {
+            "nombre": "Empático",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Cada noche, aprendes cuántos de tus 2 vecinos vivos son malvados.",
+            "emoji": "💗"
+        },
+        {
+            "nombre": "Pitonisa",
+            "tipo": "pueblerino",
+            "efecto": "Pitonisa-Falsa",
+            "info": "Cada noche, elige 2 jugadores: aprendes si alguno es un Demonio. Hay un jugador bueno que se registra como Demonio para ti.",
+            "emoji": "🔮"
+        },
+        {
+            "nombre": "Enterrador",
+            "tipo": "pueblerino",
+            "efecto": "Visto-Hoy",
+            "info": "Cada noche, aprendes qué personaje murió por ejecución hoy.",
+            "emoji": "⚰️"
+        },
+        {
+            "nombre": "Monje",
+            "tipo": "pueblerino",
+            "efecto": "Protegido",
+            "info": "Cada noche, elige a un jugador (distinto a ti): está a salvo del Demonio esta noche.",
+            "emoji": "✝️"
+        },
+        {
+            "nombre": "Guardián de cuervos",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Si mueres por la noche, te despiertan para elegir a un jugador: descubres su rol.",
+            "emoji": "🐦‍⬛"
+        },
+        {
+            "nombre": "Virgen",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "La primera vez que te nominan, si el nominador es un Pueblo, es ejecutado inmediatamente.",
+            "emoji": "💍"
+        },
+        {
+            "nombre": "Exterminador",
+            "tipo": "pueblerino",
+            "efecto": "Gastado",
+            "info": "Una vez por partida, durante el día, elige públicamente a un jugador: si es el Demonio, este muere.",
+            "emoji": "🏹"
+        },
+        {
+            "nombre": "Soldado",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Estás a salvo del Demonio (No puedes morir por las noches).",
+            "emoji": "🛡️"
+        },
+        {
+            "nombre": "Alcalde",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Si solo viven 3 jugadores y no hay ejecución, tu equipo gana. Si mueres por la noche, otro jugador podría morir en tu lugar si quiere el narrador.",
+            "emoji": "🏦"
+        },
+        {
+            "nombre": "Mayordomo",
+            "tipo": "forastero",
+            "efecto": "Patrón",
+            "info": "Cada noche, elige a un jugador (distinto a ti): mañana, solo podrás votar si él también está votando.",
+            "emoji": "🛎️"
+        },
+        {
+            "nombre": "Santo",
+            "tipo": "forastero",
+            "efecto": "none",
+            "info": "Si mueres por ejecución, tu equipo pierde.",
+            "emoji": "🪽"
+        },
+        {
+            "nombre": "Recluso",
+            "tipo": "forastero",
+            "efecto": "none",
+            "info": "Puedes registrarte como malvado y como Esbirro o Demonio, incluso si estás muerto.",
+            "emoji": "🕯️"
+        },
+        {
+            "nombre": "Borracho",
+            "tipo": "forastero",
+            "efecto": "none",
+            "info": "No sabes que eres el Borracho. Crees ser un rol diferente, pero no lo eres.",
+            "emoji": "🍺"
+        },
+        {
+            "nombre": "Mendigo",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Debes usar un token de voto para votar. Si un jugador muerto te da el suyo, conoces su bando. Estás sobrio y sano.",
+            "emoji": "🤲"
+        },
+        {
+            "nombre": "Burócrata",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Cada noche, elige a un jugador (no tú): su voto cuenta como 3 votos mañana.",
+            "emoji": "📜"
+        },
+        {
+            "nombre": "Ladrón",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Cada noche, elige a un jugador (no tú): su voto cuenta de forma negativa mañana.",
+            "emoji": "🎭"
+        },
+        {
+            "nombre": "Pistolero",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Cada día, después de que se cuente el primer voto, puedes elegir a un jugador que haya votado: este muere.",
+            "emoji": "🔫"
+        },
+        {
+            "nombre": "Chivo expiatorio",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Si un jugador de tu bando es ejecutado, tú podrías ser ejecutado en su lugar.",
+            "emoji": "🐐"
+        }
     ],
     "BMR": [
-        { "nombre": "Zombuul", "tipo": "demonio", "efecto": "Muerto-Una-Vez", "info": "Cada noche, si nadie ha muerto hoy, elige a un jugador: este muere. La primera vez que mueres, vives pero te registras como muerto.", "emoji": "🧟" },
-        { "nombre": "Pukka", "tipo": "demonio", "efecto": "Picadura", "info": "Cada noche, elige a un jugador: queda envenenado. El jugador envenenado muere en la próxima noche", "emoji": "🔱" },
-        { "nombre": "Shabaloth", "tipo": "demonio", "efecto": "none", "info": "Cada noche, elige 2 jugadores: estos mueren. Un jugador muerto que elegiste anoche podría ser resucitado si el narrador quiere.", "emoji": "👅" },
-        { "nombre": "Po", "tipo": "demonio", "efecto": "Tres-Ataques", "info": "Cada noche, puedes elegir a un jugador: este muere. Si tu última elección fue nadie, esta noche elige a 3 jugadores.", "emoji": "🩸" },
-        { "nombre": "Padrino", "tipo": "esbirro", "efecto": "Padrino-Info", "info": "Empiezas sabiendo qué Forasteros están en juego. Si 1 murió hoy, elige a un jugador esta noche: este muere.", "emoji": "🌹" },
-        { "nombre": "Asesino", "tipo": "esbirro", "efecto": "Asesino-Gastado", "info": "Una vez por partida, por la noche, elige a un jugador: este muere, no se puede bloquear este ataque", "emoji": "🔪" },
-        { "nombre": "Mente Maestra", "tipo": "esbirro", "efecto": "none", "info": "Si el Demonio muere por ejecución (terminando la partida), jugad 1 día más. Si un jugador del bando bueno es ejecutado, ganan los malos.", "emoji": "🎩" },
-        { "nombre": "Abogado del diablo", "tipo": "esbirro", "efecto": "Defendido", "info": "Cada noche, elige a un jugador vivo (distinto al anterior): si es ejecutado mañana, no muere.", "emoji": "⚖️" },
-        { "nombre": "Abuela", "tipo": "pueblerino", "efecto": "Nieto", "info": "Empiezas sabiendo un jugador bueno y su rol que será tu nieto. Si el Demonio lo mata, tú también mueres.", "emoji": "👵" },
-        { "nombre": "Camarera", "tipo": "pueblerino", "efecto": "CamareraInfo", "info": "Cada noche, elige 2 jugadores vivos (distintos a ti): aprendes cuántos despertaron esta noche debido a su habilidad.", "emoji": "🧹" },
-        { "nombre": "Marinero", "tipo": "pueblerino", "efecto": "Embriaguez", "info": "Cada noche, elige un jugador vivo: tú o él os emborracháis hasta el anochecer. No puedes morir en caso de ser tu el emborrachado.", "emoji": "⚓" },
-        { "nombre": "Exorcista", "tipo": "pueblerino", "efecto": "Elegido", "info": "Cada noche, elige a un jugador (distinto al anterior): si eliges al demonio no despertará esa noche pero sabrá quien eres.", "emoji": "✝️" },
-        { "nombre": "Posadero", "tipo": "pueblerino", "efecto": "Hospedado", "info": "Cada noche, elige 2 jugadores: no pueden morir esta noche, pero 1 se emborracha hasta el día siguiente.", "emoji": "🍺" },
-        { "nombre": "Apostador", "tipo": "pueblerino", "efecto": "none", "info": "Cada noche, elige a un jugador y adivina su rol: si fallas, mueres.", "emoji": "🎲" },
-        { "nombre": "Chismoso", "tipo": "pueblerino", "efecto": "none", "info": "Cada día, puedes hacer una declaración pública, si era cierta, un jugador muere por la noche.", "emoji": "👂" },
-        { "nombre": "Cortesana", "tipo": "pueblerino", "efecto": "Abstemia", "info": "Una vez por partida, por la noche, elige un rol: este se emborracha por 3 noches y 3 días.", "emoji": "🍷" },
-        { "nombre": "Profesor", "tipo": "pueblerino", "efecto": "Sin-Carga", "info": "Una vez por partida, por la noche, elige a un jugador muerto: si es un Pueblo, es resucitado.", "emoji": "💉" },
-        { "nombre": "Trovador", "tipo": "pueblerino", "efecto": "Melodía", "info": "Cuando un Esbirro muere por ejecución, todos los demás jugadores (excepto Viajeros) se emborrachan hasta el día siguiente.", "emoji": "👼" },
-        { "nombre": "Señora del té", "tipo": "pueblerino", "efecto": "Servido-Té", "info": "Si tus dos vecinos vivos son buenos, no pueden morir por ninguna razón.", "emoji": "🫖" },
-        { "nombre": "Pacifista", "tipo": "pueblerino", "efecto": "none", "info": "Los jugadores buenos ejecutados podrían no morir si el narrador quiere.", "emoji": "🕊️" },
-        { "nombre": "Bufón", "tipo": "pueblerino", "efecto": "none", "info": "Tienes 2 vidas", "emoji": "🎭" },
-        { "nombre": "Matón", "tipo": "forastero", "efecto": "Matón-Borracho", "info": "Eres inmortal, cada noche, el primer jugador en elegirte con su habilidad se emborracha hasta el día siguiente. Tú te pasas a su bando.", "emoji": "👊" },
-        { "nombre": "Lunático", "tipo": "forastero", "efecto": "none", "info": "Crees que eres un Demonio, pero no lo eres. El Demonio sabe quién eres y a quién eliges por la noche.", "emoji": "🌀" },
-        { "nombre": "Hija de la luna", "tipo": "forastero", "efecto": "Sentenciado", "info": "Cuando aprendes que has muerto, elige públicamente a 1 jugador vivo. Esta noche, si era un jugador bueno, muere.", "emoji": "🌙" },
-        { "nombre": "Chatarrero", "tipo": "forastero", "efecto": "none", "info": "Puedes morir en cualquier momento si el narrador quiere.", "emoji": "🚚" }
+        {
+            "nombre": "Zombuul",
+            "tipo": "demonio",
+            "efecto": "Muerto-Una-Vez",
+            "info": "Cada noche, si nadie ha muerto hoy, elige a un jugador: este muere. La primera vez que mueres, vives pero te registras como muerto.",
+            "emoji": "🧟"
+        },
+        {
+            "nombre": "Pukka",
+            "tipo": "demonio",
+            "efecto": "Picadura",
+            "info": "Cada noche, elige a un jugador: queda envenenado. El jugador envenenado muere en la próxima noche",
+            "emoji": "🔱"
+        },
+        {
+            "nombre": "Shabaloth",
+            "tipo": "demonio",
+            "efecto": "none",
+            "info": "Cada noche, elige 2 jugadores: estos mueren. Un jugador muerto que elegiste anoche podría ser resucitado si el narrador quiere.",
+            "emoji": "👅"
+        },
+        {
+            "nombre": "Po",
+            "tipo": "demonio",
+            "efecto": "Tres-Ataques",
+            "info": "Cada noche, puedes elegir a un jugador: este muere. Si tu última elección fue nadie, esta noche elige a 3 jugadores.",
+            "emoji": "🩸"
+        },
+        {
+            "nombre": "Padrino",
+            "tipo": "esbirro",
+            "efecto": "Padrino-Info",
+            "info": "Empiezas sabiendo qué Forasteros están en juego. Si 1 murió hoy, elige a un jugador esta noche: este muere.",
+            "emoji": "🌹"
+        },
+        {
+            "nombre": "Asesino",
+            "tipo": "esbirro",
+            "efecto": "Asesino-Gastado",
+            "info": "Una vez por partida, por la noche, elige a un jugador: este muere, no se puede bloquear este ataque",
+            "emoji": "🔪"
+        },
+        {
+            "nombre": "Mente Maestra",
+            "tipo": "esbirro",
+            "efecto": "none",
+            "info": "Si el Demonio muere por ejecución (terminando la partida), jugad 1 día más. Si un jugador del bando bueno es ejecutado, ganan los malos.",
+            "emoji": "🎩"
+        },
+        {
+            "nombre": "Abogado del diablo",
+            "tipo": "esbirro",
+            "efecto": "Defendido",
+            "info": "Cada noche, elige a un jugador vivo (distinto al anterior): si es ejecutado mañana, no muere.",
+            "emoji": "⚖️"
+        },
+        {
+            "nombre": "Abuela",
+            "tipo": "pueblerino",
+            "efecto": "Nieto",
+            "info": "Empiezas sabiendo un jugador bueno y su rol que será tu nieto. Si el Demonio lo mata, tú también mueres.",
+            "emoji": "👵"
+        },
+        {
+            "nombre": "Camarera",
+            "tipo": "pueblerino",
+            "efecto": "CamareraInfo",
+            "info": "Cada noche, elige 2 jugadores vivos (distintos a ti): aprendes cuántos despertaron esta noche debido a su habilidad.",
+            "emoji": "🧹"
+        },
+        {
+            "nombre": "Marinero",
+            "tipo": "pueblerino",
+            "efecto": "Embriaguez",
+            "info": "Cada noche, elige un jugador vivo: tú o él os emborracháis hasta el anochecer. No puedes morir en caso de ser tu el emborrachado.",
+            "emoji": "⚓"
+        },
+        {
+            "nombre": "Exorcista",
+            "tipo": "pueblerino",
+            "efecto": "Elegido",
+            "info": "Cada noche, elige a un jugador (distinto al anterior): si eliges al demonio no despertará esa noche pero sabrá quien eres.",
+            "emoji": "✝️"
+        },
+        {
+            "nombre": "Posadero",
+            "tipo": "pueblerino",
+            "efecto": "Hospedado",
+            "info": "Cada noche, elige 2 jugadores: no pueden morir esta noche, pero 1 se emborracha hasta el día siguiente.",
+            "emoji": "🍺"
+        },
+        {
+            "nombre": "Apostador",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Cada noche, elige a un jugador y adivina su rol: si fallas, mueres.",
+            "emoji": "🎲"
+        },
+        {
+            "nombre": "Chismoso",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Cada día, puedes hacer una declaración pública, si era cierta, un jugador muere por la noche.",
+            "emoji": "👂"
+        },
+        {
+            "nombre": "Cortesana",
+            "tipo": "pueblerino",
+            "efecto": "Abstemia",
+            "info": "Una vez por partida, por la noche, elige un rol: este se emborracha por 3 noches y 3 días.",
+            "emoji": "🍷"
+        },
+        {
+            "nombre": "Profesor",
+            "tipo": "pueblerino",
+            "efecto": "Sin-Carga",
+            "info": "Una vez por partida, por la noche, elige a un jugador muerto: si es un Pueblo, es resucitado.",
+            "emoji": "💉"
+        },
+        {
+            "nombre": "Trovador",
+            "tipo": "pueblerino",
+            "efecto": "Melodía",
+            "info": "Cuando un Esbirro muere por ejecución, todos los demás jugadores (excepto Viajeros) se emborrachan hasta el día siguiente.",
+            "emoji": "👼"
+        },
+        {
+            "nombre": "Señora del té",
+            "tipo": "pueblerino",
+            "efecto": "Servido-Té",
+            "info": "Si tus dos vecinos vivos son buenos, no pueden morir por ninguna razón.",
+            "emoji": "🫖"
+        },
+        {
+            "nombre": "Pacifista",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Los jugadores buenos ejecutados podrían no morir si el narrador quiere.",
+            "emoji": "🕊️"
+        },
+        {
+            "nombre": "Bufón",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Tienes 2 vidas",
+            "emoji": "🎭"
+        },
+        {
+            "nombre": "Matón",
+            "tipo": "forastero",
+            "efecto": "Matón-Borracho",
+            "info": "Eres inmortal, cada noche, el primer jugador en elegirte con su habilidad se emborracha hasta el día siguiente. Tú te pasas a su bando.",
+            "emoji": "👊"
+        },
+        {
+            "nombre": "Lunático",
+            "tipo": "forastero",
+            "efecto": "none",
+            "info": "Crees que eres un Demonio, pero no lo eres. El Demonio sabe quién eres y a quién eliges por la noche.",
+            "emoji": "🌀"
+        },
+        {
+            "nombre": "Hija de la luna",
+            "tipo": "forastero",
+            "efecto": "Sentenciado",
+            "info": "Cuando aprendes que has muerto, elige públicamente a 1 jugador vivo. Esta noche, si era un jugador bueno, muere.",
+            "emoji": "🌙"
+        },
+        {
+            "nombre": "Chatarrero",
+            "tipo": "forastero",
+            "efecto": "none",
+            "info": "Puedes morir en cualquier momento si el narrador quiere.",
+            "emoji": "🚚"
+        },
+        {
+            "nombre": "Aprendiz",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "En tu primera noche, ganas una habilidad de Pueblo (si eres bueno) o de Esbirro (si eres malo).",
+            "emoji": "🛠️"
+        },
+        {
+            "nombre": "Obispo",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Solo el Narrador puede nominar. Al menos 1 jugador del bando contrario debe ser nominado cada día.",
+            "emoji": "⛪"
+        },
+        {
+            "nombre": "Juez",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Una vez por partida, si otro jugador nominó, puedes elegir forzar que la ejecución actual se apruebe o fracase.",
+            "emoji": "⚖️"
+        },
+        {
+            "nombre": "Matrona",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Cada día, puedes elegir hasta 3 parejas de jugadores para intercambiar sus asientos. Los jugadores no pueden abandonar sus asientos para hablar en privado.",
+            "emoji": "👵"
+        },
+        {
+            "nombre": "Vudú",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Solo tú y los muertos podéis votar. No necesitan un token de voto para hacerlo. No se requiere mayoría del 50%.",
+            "emoji": "🪆"
+        }
     ],
     "SV": [
-        { "nombre": "Vortox", "tipo": "demonio", "efecto": "none", "info": "Cada noche, elige a un jugador: este muere. Las habilidades de Pueblo dan info falsa. Cada día, si nadie es ejecutado, los malvados ganan.", "emoji": "🌪️" },
-        { "nombre": "Fang Gu", "tipo": "demonio", "efecto": "Infectado", "info": "Cada noche, elige a un jugador: este muere. El primer Forastero que muere por esto se convierte en un Fang Gu malvado y tú mueres en su lugar.", "emoji": "🫴" },
-        { "nombre": "Vigormortis", "tipo": "demonio", "efecto": "Necrosis", "info": "Cada noche, elige a un jugador: este muere. Los Esbirros que matas conservan su habilidad y envenenan a 1 vecino de Pueblo.", "emoji": "💀" },
-        { "nombre": "No Dashii", "tipo": "demonio", "efecto": "Aturdimiento", "info": "Cada noche, elige a un jugador: este muere. Tus 2 vecinos Pueblerinos quedan envenenados.", "emoji": "🐙" },
-        { "nombre": "Madrastra del foso", "tipo": "esbirro", "efecto": "none", "info": "Cada noche, elige a un jugador y a un rol en el que se convierte (si no está en juego). Si se crea un Demonio, las muertes de hoy son arbitrarias.", "emoji": "🔮" },
-        { "nombre": "Cerenovus", "tipo": "esbirro", "efecto": "Locura", "info": "Cada noche, elige a un jugador y un personaje bueno: este está 'loco' porque debe fingir ser este personaje mañana, o podría ser ejecutado.", "emoji": "🧠" },
-        { "nombre": "Gemelo Malvado", "tipo": "esbirro", "efecto": "Gemelo", "info": "Tú y un jugador oponente os conocéis mutuamente. Si el jugador bueno es ejecutado, los malvados ganan. Los buenos no ganan si ambos vivís.", "emoji": "👥" },
-        { "nombre": "Bruja", "tipo": "esbirro", "efecto": "Maldecido", "info": "Cada noche, elige a un jugador: si nomina mañana, muere. Si solo viven 3 jugadores, pierdes esta habilidad.", "emoji": "🧹" },
-        { "nombre": "Relojero", "tipo": "pueblerino", "efecto": "Encantado", "info": "Empiezas sabiendo a cuántos pasos de distancia está el Demonio de su Esbirro más cercano.", "emoji": "🕰️" },
-        { "nombre": "Encantador de serpientes", "tipo": "pueblerino", "efecto": "Encantado", "info": "Cada noche, elige a un jugador vivo: si es el Demonio elegido, intercambiáis personajes y bandos, y él queda envenenado permanente.", "emoji": "🐍" },
-        { "nombre": "Erudito", "tipo": "pueblerino", "efecto": "none", "info": "Cada día, puedes visitar al Narrador para aprender 2 cosas en privado: 1 es verdad y 1 es mentira.", "emoji": "🧑‍🦽‍➡️" },
-        { "nombre": "Costurera", "tipo": "pueblerino", "efecto": "Costura-Hecha", "info": "Una vez por partida, por la noche, elige 2 jugadores (distintos a ti): aprendes si son del mismo bando.", "emoji": "🧶" },
-        { "nombre": "Florista", "tipo": "pueblerino", "efecto": "Votó-Demonio", "info": "Cada noche, aprendes si un Demonio votó hoy.", "emoji": "💐" },
-        { "nombre": "Pregonero", "tipo": "pueblerino", "efecto": "Nominó-Esbirro", "info": "Cada noche, aprendes si un Esbirro nominó hoy.", "emoji": "🔔" },
-        { "nombre": "Oráculo", "tipo": "pueblerino", "efecto": "none", "info": "Cada noche, aprendes cuántos jugadores muertos son malvados.", "emoji": "👁️" },
-        { "nombre": "Soñador", "tipo": "pueblerino", "efecto": "none", "info": "Cada noche, elige a un jugador (no tú ni Viajeros): aprendes 1 rol bueno y 1 malvado, uno de ellos es el correcto.", "emoji": "💫" },
-        { "nombre": "Artista", "tipo": "pueblerino", "efecto": "Preguntado", "info": "Una vez por partida, durante el día, pregunta en privado al Narrador cualquier pregunta de Sí/No.", "emoji": "🖌️" },
-        { "nombre": "Malabarista", "tipo": "pueblerino", "efecto": "Malabares", "info": "En tu primer día, adivina públicamente los roles de hasta 5 jugadores. Esa noche, aprendes cuántos acertaste.", "emoji": "🎳" },
-        { "nombre": "Sabio", "tipo": "pueblerino", "efecto": "none", "info": "Si el Demonio te mata, aprendes que es 1 de 2 jugadores.", "emoji": "🕯️" },
-        { "nombre": "Matemático", "tipo": "pueblerino", "efecto": "none", "info": "Cada noche, aprendes cuántas habilidades de jugadores funcionaron de forma anormal (desde el amanecer) debido a la habilidad de otro personaje.", "emoji": "📐" },
-        { "nombre": "Filósofo", "tipo": "pueblerino", "efecto": "Copiando", "info": "Una vez por partida, por la noche, elige un personaje bueno: obtienes esa habilidad. Si este rol está en juego, se emborracha permanente.", "emoji": "📖" },
-        { "nombre": "Patoso", "tipo": "forastero", "efecto": "none", "info": "Cuando sepas que has muerto, elige públicamente a 1 jugador vivo: si es malvado, tu equipo pierde.", "emoji": "🍌" },
-        { "nombre": "Barbero", "tipo": "forastero", "efecto": "Corte-Pelo", "info": "Si moriste hoy o esta noche, el Demonio puede elegir 2 jugadores (no otro Demonio) para intercambiar personajes.", "emoji": "✂️" },
-        { "nombre": "Cariño", "tipo": "forastero", "efecto": "Duelo", "info": "Cuando mueres, 1 jugador se emborracha permanente.", "emoji": "🎀" },
-        { "nombre": "Mutante", "tipo": "forastero", "efecto": "none", "info": "Tienes que hacer creer a los demás que no eres forastero en caso contrario serás ejecutado.", "emoji": "🎪" }
+        {
+            "nombre": "Vortox",
+            "tipo": "demonio",
+            "efecto": "none",
+            "info": "Cada noche, elige a un jugador: este muere. Las habilidades de Pueblo dan info falsa. Cada día, si nadie es ejecutado, los malvados ganan.",
+            "emoji": "🌪️"
+        },
+        {
+            "nombre": "Fang Gu",
+            "tipo": "demonio",
+            "efecto": "Infectado",
+            "info": "Cada noche, elige a un jugador: este muere. El primer Forastero que muere por esto se convierte en un Fang Gu malvado y tú mueres en su lugar.",
+            "emoji": "🫴"
+        },
+        {
+            "nombre": "Vigormortis",
+            "tipo": "demonio",
+            "efecto": "Necrosis",
+            "info": "Cada noche, elige a un jugador: este muere. Los Esbirros que matas conservan su habilidad y envenenan a 1 vecino de Pueblo.",
+            "emoji": "💀"
+        },
+        {
+            "nombre": "No Dashii",
+            "tipo": "demonio",
+            "efecto": "Aturdimiento",
+            "info": "Cada noche, elige a un jugador: este muere. Tus 2 vecinos Pueblerinos quedan envenenados.",
+            "emoji": "🐙"
+        },
+        {
+            "nombre": "Madrastra del foso",
+            "tipo": "esbirro",
+            "efecto": "none",
+            "info": "Cada noche, elige a un jugador y a un rol en el que se convierte (si no está en juego). Si se crea un Demonio, las muertes de hoy son arbitrarias.",
+            "emoji": "🔮"
+        },
+        {
+            "nombre": "Cerenovus",
+            "tipo": "esbirro",
+            "efecto": "Locura",
+            "info": "Cada noche, elige a un jugador y un personaje bueno: este está 'loco' porque debe fingir ser este personaje mañana, o podría ser ejecutado.",
+            "emoji": "🧠"
+        },
+        {
+            "nombre": "Gemelo Malvado",
+            "tipo": "esbirro",
+            "efecto": "Gemelo",
+            "info": "Tú y un jugador oponente os conocéis mutuamente. Si el jugador bueno es ejecutado, los malvados ganan. Los buenos no ganan si ambos vivís.",
+            "emoji": "👥"
+        },
+        {
+            "nombre": "Bruja",
+            "tipo": "esbirro",
+            "efecto": "Maldecido",
+            "info": "Cada noche, elige a un jugador: si nomina mañana, muere. Si solo viven 3 jugadores, pierdes esta habilidad.",
+            "emoji": "🧹"
+        },
+        {
+            "nombre": "Relojero",
+            "tipo": "pueblerino",
+            "efecto": "Encantado",
+            "info": "Empiezas sabiendo a cuántos pasos de distancia está el Demonio de su Esbirro más cercano.",
+            "emoji": "🕰️"
+        },
+        {
+            "nombre": "Encantador de serpientes",
+            "tipo": "pueblerino",
+            "efecto": "Encantado",
+            "info": "Cada noche, elige a un jugador vivo: si es el Demonio elegido, intercambiáis personajes y bandos, y él queda envenenado permanente.",
+            "emoji": "🐍"
+        },
+        {
+            "nombre": "Erudito",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Cada día, puedes visitar al Narrador para aprender 2 cosas en privado: 1 es verdad y 1 es mentira.",
+            "emoji": "🧑‍🦽‍➡️"
+        },
+        {
+            "nombre": "Costurera",
+            "tipo": "pueblerino",
+            "efecto": "Costura-Hecha",
+            "info": "Una vez por partida, por la noche, elige 2 jugadores (distintos a ti): aprendes si son del mismo bando.",
+            "emoji": "🧶"
+        },
+        {
+            "nombre": "Florista",
+            "tipo": "pueblerino",
+            "efecto": "Votó-Demonio",
+            "info": "Cada noche, aprendes si un Demonio votó hoy.",
+            "emoji": "💐"
+        },
+        {
+            "nombre": "Pregonero",
+            "tipo": "pueblerino",
+            "efecto": "Nominó-Esbirro",
+            "info": "Cada noche, aprendes si un Esbirro nominó hoy.",
+            "emoji": "🔔"
+        },
+        {
+            "nombre": "Oráculo",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Cada noche, aprendes cuántos jugadores muertos son malvados.",
+            "emoji": "👁️"
+        },
+        {
+            "nombre": "Soñador",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Cada noche, elige a un jugador (no tú ni Viajeros): aprendes 1 rol bueno y 1 malvado, uno de ellos es el correcto.",
+            "emoji": "💫"
+        },
+        {
+            "nombre": "Artista",
+            "tipo": "pueblerino",
+            "efecto": "Preguntado",
+            "info": "Una vez por partida, durante el día, pregunta en privado al Narrador cualquier pregunta de Sí/No.",
+            "emoji": "🖌️"
+        },
+        {
+            "nombre": "Malabarista",
+            "tipo": "pueblerino",
+            "efecto": "Malabares",
+            "info": "En tu primer día, adivina públicamente los roles de hasta 5 jugadores. Esa noche, aprendes cuántos acertaste.",
+            "emoji": "🎳"
+        },
+        {
+            "nombre": "Sabio",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Si el Demonio te mata, aprendes que es 1 de 2 jugadores.",
+            "emoji": "🕯️"
+        },
+        {
+            "nombre": "Matemático",
+            "tipo": "pueblerino",
+            "efecto": "none",
+            "info": "Cada noche, aprendes cuántas habilidades de jugadores funcionaron de forma anormal (desde el amanecer) debido a la habilidad de otro personaje.",
+            "emoji": "📐"
+        },
+        {
+            "nombre": "Filósofo",
+            "tipo": "pueblerino",
+            "efecto": "Copiando",
+            "info": "Una vez por partida, por la noche, elige un personaje bueno: obtienes esa habilidad. Si este rol está en juego, se emborracha permanente.",
+            "emoji": "📖"
+        },
+        {
+            "nombre": "Patoso",
+            "tipo": "forastero",
+            "efecto": "none",
+            "info": "Cuando sepas que has muerto, elige públicamente a 1 jugador vivo: si es malvado, tu equipo pierde.",
+            "emoji": "🍌"
+        },
+        {
+            "nombre": "Barbero",
+            "tipo": "forastero",
+            "efecto": "Corte-Pelo",
+            "info": "Si moriste hoy o esta noche, el Demonio puede elegir 2 jugadores (no otro Demonio) para intercambiar personajes.",
+            "emoji": "✂️"
+        },
+        {
+            "nombre": "Cariño",
+            "tipo": "forastero",
+            "efecto": "Duelo",
+            "info": "Cuando mueres, 1 jugador se emborracha permanente.",
+            "emoji": "🎀"
+        },
+        {
+            "nombre": "Mutante",
+            "tipo": "forastero",
+            "efecto": "none",
+            "info": "Tienes que hacer creer a los demás que no eres forastero en caso contrario serás ejecutado.",
+            "emoji": "🎪"
+        },
+        {
+            "nombre": "Barista",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Cada noche, hasta el atardecer, 1) un jugador está sobrio, sano y obtiene info real, o 2) su habilidad funciona dos veces. Él se entera de cuál.",
+            "emoji": "☕"
+        },
+        {
+            "nombre": "Coleccionista de huesos",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Una vez por partida, por la noche, elige a un jugador muerto: este recupera su habilidad hasta el atardecer.",
+            "emoji": "🦴"
+        },
+        {
+            "nombre": "Carnicero",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Cada día, después de la primera ejecución, puedes nominar otra vez.",
+            "emoji": "🔪"
+        },
+        {
+            "nombre": "Desviado",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Si fuiste gracioso hoy, no puedes morir por exilio.",
+            "emoji": "🃏"
+        },
+        {
+            "nombre": "Ramera",
+            "tipo": "viajero",
+            "efecto": "none",
+            "info": "Cada noche, elige a un jugador vivo: si acepta, descubres su personaje, pero ambos podríais morir.",
+            "emoji": "💋"
+        }
     ]
 }
