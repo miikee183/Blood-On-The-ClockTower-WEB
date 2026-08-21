@@ -37,7 +37,7 @@ const EDICIONES = {
         { nombre: "Abogado del diablo", tipo: "esbirro", efecto: "Defendido", info: "Cada noche elige alguien, hará inmune a las ejecuciones a ese jugador.", emoji: "⚖️" },
         { nombre: "Abuela", tipo: "pueblerino", efecto: "Nieto", info: "La abuela sabrá quien es su nieto y su rol que será uno de los buenos pero el nieto no sabe que tiene abuela, si el nieto es asesinado por un demonio la abuela morirá pero por otro tipo de muerte no pasa nada.", emoji: "👵" },
         { nombre: "Camarera", tipo: "pueblerino", efecto: "CamareraInfo", info: "Elige a 2 jugadores y sabrá si ellos se levantaron la misma noche que ella.", emoji: "🧹" },
-        { nombre: "Marinero", tipo: "pueblerino", efecto: "Embriaguez", info: "Borracho e inmortal.", emoji: "⚓" },
+        { nombre: "Marinero", tipo: "pueblerino", efecto: "Embriaguez", info: "Elige a un jugador, él o el jugador elegido se emborrachara si el emborrachado es el marinero será inmortal mientras esté borracho.", emoji: "⚓" },
         { nombre: "Exorcista", tipo: "pueblerino", efecto: "Elegido", info: "Elige un jugador si es el demonio esa noche no despertará, pero sabrá que eres el Exorcista.", emoji: "✝️" },
         { nombre: "Posadero", tipo: "pueblerino", efecto: "Hospedado", info: "Elige 2 jugadores los protegerás esa noche pero uno de ellos se emborracha un día.", emoji: "🍺" },
         { nombre: "Apostador", tipo: "pueblerino", efecto: "none", info: "Todas las noches puede elegir a un jugador si adivina su rol no pasa nada, si lo falla el mismo muere.", emoji: "🎲" },
